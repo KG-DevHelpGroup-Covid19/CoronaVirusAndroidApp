@@ -31,13 +31,13 @@
 
     <fragment
         android:id="@+id/nav_gallery"
-        android:name="kg.koronastaff.staffapp.ui.gallery.GalleryFragment"
+        android:name="kg.koronastaff.staffapp.ui.fakenews.FakenewsFragment"
         android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        tools:layout="@layout/fragment_fakenews" />
 
     <fragment
         android:id="@+id/nav_slideshow"
-        android:name="kg.koronastaff.staffapp.ui.slideshow.SlideshowFragment"
+        android:name="kg.koronastaff.staffapp.ui.faq.FAQFragment"
         android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
+        tools:layout="@layout/fragment_faq" />
 </navigation>

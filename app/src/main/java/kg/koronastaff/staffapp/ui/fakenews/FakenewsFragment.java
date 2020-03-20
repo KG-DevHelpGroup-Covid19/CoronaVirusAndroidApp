@@ -1,4 +1,4 @@
-package kg.koronastaff.staffapp.ui.home;
+package kg.koronastaff.staffapp.ui.fakenews;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,22 +11,22 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
 
 import kg.koronastaff.staffapp.R;
 
-public class HomeFragment extends Fragment {
+public class FakenewsFragment extends Fragment {
 
-    private HomeViewModel homeViewModel;
+    private FakenewsViewModel fakenewsViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        homeViewModel =
-                new ViewModelProvider(this).get(HomeViewModel.class);
+        fakenewsViewModel =
+                new ViewModelProvider(this).get(FakenewsViewModel.class);
 
-        View root = inflater.inflate(R.layout.fragment_home, container, false);
-        final TextView textView = root.findViewById(R.id.text_home);
-        homeViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        View root = inflater.inflate(R.layout.fragment_fakenews, container, false);
+        final TextView textView = root.findViewById(R.id.text_gallery);
+
+        fakenewsViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }
 }
