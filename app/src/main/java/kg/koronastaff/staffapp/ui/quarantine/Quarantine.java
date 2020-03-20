@@ -1,5 +1,6 @@
 package kg.koronastaff.staffapp.ui.quarantine;
 
+import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.os.Bundle;
@@ -31,7 +32,7 @@ public class Quarantine extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = ViewModelProviders.of(this).get(QuarantineViewModel.class);
+        mViewModel = new ViewModelProvider(this).get(QuarantineViewModel.class);
         // TODO: Use the ViewModel
     }
 

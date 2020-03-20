@@ -29,7 +29,7 @@ public class NewsFragment extends Fragment {
 
         newsViewModel = new ViewModelProvider(this).get(NewsViewModel.class);
 
-        var rootView = inflater.inflate(R.layout.fragment_news, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_news, container, false);
 
         recyclerViewNews = rootView.findViewById(R.id.news_list_recycler);
         TNewsDate = rootView.findViewById(R.id.t_news_date);

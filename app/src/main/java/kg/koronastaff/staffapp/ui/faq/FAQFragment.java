@@ -20,7 +20,7 @@ public class FAQFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         faqViewModel = new ViewModelProvider(this).get(FAQViewModel.class);
 
-        var root = inflater.inflate(R.layout.fragment_faq, container, false);
+        View root = inflater.inflate(R.layout.fragment_faq, container, false);
 
         final TextView textView = root.findViewById(R.id.text_slideshow);
 
