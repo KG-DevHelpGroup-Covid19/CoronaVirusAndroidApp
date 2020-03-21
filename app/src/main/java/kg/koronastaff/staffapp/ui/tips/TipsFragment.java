@@ -20,7 +20,7 @@ public class TipsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_tips, container, false);
-        recyclerViewTips = rootView.findViewById(R.id.tips_list_recycler);
+        recyclerViewTips = rootView.findViewById(R.id.tips_recycler);
         return rootView;
     }
 }
