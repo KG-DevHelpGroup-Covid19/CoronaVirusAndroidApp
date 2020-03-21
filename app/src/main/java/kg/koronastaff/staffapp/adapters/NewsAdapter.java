@@ -13,10 +13,10 @@ import java.util.Date;
 
 import kg.koronastaff.staffapp.R;
 import kg.koronastaff.staffapp.models.FakeNews;
-import kg.koronastaff.staffapp.models.QuarantineSteps;
+import kg.koronastaff.staffapp.models.News;
 
-public class FakeNewsAdapter extends RecyclerView.Adapter<FakeNewsAdapter.MyViewHolder> {
-    private ArrayList<FakeNews> mDataset;
+public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.MyViewHolder> {
+    private ArrayList<News> mDataset;
 
     static class MyViewHolder extends RecyclerView.ViewHolder {
         CardView frame;
@@ -26,12 +26,12 @@ public class FakeNewsAdapter extends RecyclerView.Adapter<FakeNewsAdapter.MyView
         }
     }
 
-    public FakeNewsAdapter(ArrayList<FakeNews> myDataset) {
+    public NewsAdapter(ArrayList<News> myDataset) {
         mDataset = myDataset;
     }
 
     @Override
-    public FakeNewsAdapter.MyViewHolder onCreateViewHolder(
+    public NewsAdapter.MyViewHolder onCreateViewHolder(
             ViewGroup parent, int viewType) {
 
         CardView v = (CardView) LayoutInflater.from(parent.getContext())
@@ -43,7 +43,7 @@ public class FakeNewsAdapter extends RecyclerView.Adapter<FakeNewsAdapter.MyView
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        FakeNews f = this.mDataset.get(position);
+        News f = this.mDataset.get(position);
         TextView title = holder.frame.findViewById(R.id.fake_text);
         title.setText(f.getTitle());
         TextView body = holder.frame.findViewById(R.id.fake_body);
@@ -65,7 +65,7 @@ public class FakeNewsAdapter extends RecyclerView.Adapter<FakeNewsAdapter.MyView
         return mDataset.size();
     }
 
-    public void update(ArrayList<FakeNews> myDataset) {
+    public void update(ArrayList<News> myDataset) {
         mDataset = myDataset;
         notifyDataSetChanged();
     }

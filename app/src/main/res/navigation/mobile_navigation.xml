@@ -7,9 +7,9 @@
 
     <fragment
         android:id="@+id/menu_news"
-        android:name="kg.koronastaff.staffapp.ui.home.HomeFragment"
+        android:name="kg.koronastaff.staffapp.ui.news.NewsFragment"
         android:label="@string/menu_news"
-        tools:layout="@layout/fragment_home">
+        tools:layout="@layout/fragment_news">
     </fragment>
 
     <fragment
