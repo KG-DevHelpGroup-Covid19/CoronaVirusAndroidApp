@@ -3,11 +3,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/grey_background"
     tools:context=".ui.contacts.Contacts">
-
-    <TextView
+    <include layout="@layout/stat_item"/>
+    <RelativeLayout
+        android:layout_marginTop="65dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Hello" />
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="15dp"
+            android:textSize="20sp"
+            android:textColor="@color/black"
+            android:text="@string/contact_name" />
+    </RelativeLayout>
 
 </FrameLayout>
