@@ -1,42 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
+    android:background="@color/grey_background"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
-    <TextView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/map_name"
-        android:id="@+id/t_map_name"
-        >
-    </TextView>
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <include layout="@layout/stat_item"/>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_marginTop="65dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/news_label"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="15dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:text="@string/map_name"
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/city_label"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="15dp"
+                    app:layout_constraintTop_toBottomOf="@id/news_label"
+                    android:text="@string/map_city"
+                    android:textColor="@color/black"
+                    android:textSize="13sp"
+                    android:paddingLeft="15dp"
+                    tools:ignore="RtlSymmetry" />
 
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/map_city"
-        >
-    </TextView>
 
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/map_recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    app:layout_constraintTop_toBottomOf="@+id/city_label"/>
 
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <Spinner
-        android:id="@+id/map_spinner_city"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        />
+        </RelativeLayout>
 
-
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/map_list_recycler"
-        />
-
+    </androidx.core.widget.NestedScrollView>
 
 
 </LinearLayout>
