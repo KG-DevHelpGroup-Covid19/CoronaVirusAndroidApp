@@ -5,16 +5,32 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_home"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="@string/menu_home" />
+            android:id="@+id/menu_news"
+            android:icon="@drawable/house"
+            android:title="@string/menu_news" />
         <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="@string/menu_gallery" />
+            android:id="@+id/menu_map_help"
+            android:icon="@drawable/house"
+            android:title="@string/menu_map_help" />
         <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="@string/menu_slideshow" />
+            android:id="@+id/menu_tips_voz"
+            android:icon="@drawable/house"
+            android:title="@string/menu_tips_voz" />
+        <item
+            android:id="@+id/menu_quations_covid19"
+            android:icon="@drawable/house"
+            android:title="@string/menu_quations_covid19" />
+        <item
+            android:id="@+id/menu_quarantine"
+            android:icon="@drawable/house"
+            android:title="@string/menu_quarantine" />
+        <item
+            android:id="@+id/menu_fake"
+            android:icon="@drawable/house"
+            android:title="@string/menu_fake" />
+        <item
+            android:id="@+id/menu_contact"
+            android:icon="@drawable/house"
+            android:title="@string/menu_contact" />
     </group>
 </menu>

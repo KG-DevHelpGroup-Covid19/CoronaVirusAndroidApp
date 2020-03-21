@@ -1,7 +1,6 @@
 package kg.koronastaff.staffapp.ui.quarantine;
 
 import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
 
 import android.os.Bundle;
 
@@ -15,18 +14,18 @@ import android.view.ViewGroup;
 
 import kg.koronastaff.staffapp.R;
 
-public class Quarantine extends Fragment {
+public class QuarantineFragment extends Fragment {
 
     private QuarantineViewModel mViewModel;
 
-    public static Quarantine newInstance() {
-        return new Quarantine();
+    public static QuarantineFragment newInstance() {
+        return new QuarantineFragment();
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.quarantine_fragment, container, false);
+        return inflater.inflate(R.layout.fragment_quarantine, container, false);
     }
 
     @Override

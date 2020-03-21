@@ -2,16 +2,8 @@
     <string name="app_name">CoronaVirusAppKg</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Settings</string>
 
-    <string name="menu_home">Home</string>
-    <string name="menu_gallery">Gallery</string>
-    <string name="menu_slideshow">Slideshow</string>
-
-    <string name="home_second">Home Second</string>
 
     //----------------------------------------------
     //крыша
@@ -19,6 +11,12 @@
     <string name="head_lang_kg">KG</string>
     <string name="head_lang_eng">ENG</string>
     <string name="head_lang_ru">RU</string>
+
+    <string-array name="head_lang">
+        <item>KG</item>
+        <item>ENG</item>
+        <item>RU</item>
+    </string-array>
 
     //заражены
     <string name="status_kg_info">Данные по Кыргызстану в режиме онлайн</string>
@@ -105,4 +103,6 @@
     //----------------------------------------------
     //contact
     <string name="contact_name">Контакты штаба </string>
+    <string name="current_lang">RU</string>
+    <string name="menu_home">домой</string>
 </resources>
