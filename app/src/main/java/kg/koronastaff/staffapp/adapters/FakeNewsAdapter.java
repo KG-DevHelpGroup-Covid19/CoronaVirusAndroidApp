@@ -13,7 +13,6 @@ import java.util.Date;
 
 import kg.koronastaff.staffapp.R;
 import kg.koronastaff.staffapp.models.FakeNews;
-import kg.koronastaff.staffapp.models.QuarantineSteps;
 
 public class FakeNewsAdapter extends RecyclerView.Adapter<FakeNewsAdapter.MyViewHolder> {
     private ArrayList<FakeNews> mDataset;
