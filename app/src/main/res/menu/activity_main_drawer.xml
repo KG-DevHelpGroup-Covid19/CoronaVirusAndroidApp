@@ -10,27 +10,27 @@
             android:title="@string/menu_news" />
         <item
             android:id="@+id/menu_map_help"
-            android:icon="@drawable/house"
+            android:icon="@drawable/map"
             android:title="@string/menu_map_help" />
         <item
             android:id="@+id/menu_tips_voz"
-            android:icon="@drawable/house"
+            android:icon="@drawable/lenta"
             android:title="@string/menu_tips_voz" />
         <item
             android:id="@+id/menu_quations_covid19"
-            android:icon="@drawable/house"
+            android:icon="@drawable/question"
             android:title="@string/menu_quations_covid19" />
         <item
             android:id="@+id/menu_quarantine"
-            android:icon="@drawable/house"
+            android:icon="@drawable/cases"
             android:title="@string/menu_quarantine" />
         <item
             android:id="@+id/menu_fake"
-            android:icon="@drawable/house"
+            android:icon="@drawable/fake_message"
             android:title="@string/menu_fake" />
         <item
             android:id="@+id/menu_contact"
-            android:icon="@drawable/house"
+            android:icon="@drawable/book"
             android:title="@string/menu_contact" />
     </group>
 </menu>

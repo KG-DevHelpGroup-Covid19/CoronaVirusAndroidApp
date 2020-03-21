@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/grey_background"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.quarantine.QuarantineFragment">
 
@@ -14,7 +15,7 @@
             android:layout_height="match_parent">
             <include layout="@layout/stat_item"/>
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_marginTop="65dp"
+                android:layout_marginTop="75dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 

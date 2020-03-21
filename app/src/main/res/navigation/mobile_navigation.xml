@@ -10,6 +10,18 @@
         android:name="kg.koronastaff.staffapp.ui.news.NewsFragment"
         android:label="@string/menu_news"
         tools:layout="@layout/fragment_news">
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/tests_fragment"
+        android:name="kg.koronastaff.staffapp.ui.tests.TestsFragment"
+        android:label="@string/test_name"
+        tools:layout="@layout/fragment_tests">
+
+        <action
+            android:id="@+id/action_tests_fragment_to_menu_quations_covid19"
+            app:destination="@id/menu_quations_covid19" />
     </fragment>
 
     <fragment
@@ -29,7 +41,11 @@
         android:id="@+id/menu_quations_covid19"
         android:name="kg.koronastaff.staffapp.ui.faq.FAQFragment"
         android:label="@string/menu_quations_covid19"
-        tools:layout="@layout/fragment_faq" />
+        tools:layout="@layout/fragment_faq" >
+        <action
+            android:id="@+id/action_menu_quations_covid19_to_tests_fragment"
+            app:destination="@id/tests_fragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/menu_quarantine"
@@ -46,7 +62,7 @@
 
     <fragment
         android:id="@+id/menu_contact"
-        android:name="kg.koronastaff.staffapp.ui.contacts.Contacts"
+        android:name="kg.koronastaff.staffapp.ui.contacts.ContactsFragment"
         android:label="@string/menu_contact"
         tools:layout="@layout/fragment_cotacts" />
 

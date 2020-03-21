@@ -1,7 +1,6 @@
 package kg.koronastaff.staffapp.ui.contacts;
 
 import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
 
 import android.os.Bundle;
 
@@ -15,12 +14,12 @@ import android.view.ViewGroup;
 
 import kg.koronastaff.staffapp.R;
 
-public class Contacts extends Fragment {
+public class ContactsFragment extends Fragment {
 
     private ContactsViewModel mViewModel;
 
-    public static Contacts newInstance() {
-        return new Contacts();
+    public static ContactsFragment newInstance() {
+        return new ContactsFragment();
     }
 
     @Override

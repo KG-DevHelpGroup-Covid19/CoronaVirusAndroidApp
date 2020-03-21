@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">CoronaVirusAppKg</string>
+    <string name="app_name">Штаб КР по COVID-19</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_desc">Navigation header</string>
@@ -67,8 +67,9 @@
     //----------------------------------------------
     //quations
     <string name="quations_name">Вопросы про вирус COVID19</string>
-    <string name="quations_text">Здесь собраны часто задаваемы вопросы по вирусу помимо этого вы </string>
-    <string name="quations_text_two">можете пройти тест на наличие признаков COVID19</string>
+    <string name="quations_text">Здесь собраны часто задаваемы вопросы по вирусу помимо этого вы
+        можете пройти тест на наличие признаков COVID19</string>
+
     <string name="quations_test">Пройти тест</string>
 
     //----------------------------------------------
@@ -121,4 +122,7 @@
         ☎️ Ишкерлер үчүн үчүн КРдин Экономика министрлигинин Сall-борборунун телефондору:\n
         📍 +996 312 620319;\n
         📍 Whats Аpp 0555774405.</string>
+    <string name="of">из</string>
+    <string name="test_positive">10. Заполните анкету о себе</string>
+    <string name="test_positive_second">В случае потверждения у вас всех признаков covid 19 просим вас запонить анкету</string>
 </resources>
