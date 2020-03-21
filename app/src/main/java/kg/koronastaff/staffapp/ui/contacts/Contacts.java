@@ -1,5 +1,6 @@
 package kg.koronastaff.staffapp.ui.contacts;
 
+import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.os.Bundle;
@@ -31,7 +32,7 @@ public class Contacts extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = ViewModelProviders.of(this).get(ContactsViewModel.class);
+        mViewModel = new ViewModelProvider(this).get(ContactsViewModel.class);
         // TODO: Use the ViewModel
     }
 
