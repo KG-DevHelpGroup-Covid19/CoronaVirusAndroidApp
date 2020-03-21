@@ -11,11 +11,12 @@
         android:label="@string/menu_news"
         tools:layout="@layout/fragment_home">
     </fragment>
+
     <fragment
         android:id="@+id/menu_map_help"
-        android:name="kg.koronastaff.staffapp.ui.contacts.Contacts"
+        android:name="kg.koronastaff.staffapp.ui.map.MapFragment"
         android:label="@string/menu_contact"
-        tools:layout="@layout/fragment_cotacts">
+        tools:layout="@layout/fragment_map">
     </fragment>
 
     <fragment
