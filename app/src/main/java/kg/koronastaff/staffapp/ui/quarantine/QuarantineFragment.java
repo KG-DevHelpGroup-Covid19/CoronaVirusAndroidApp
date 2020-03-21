@@ -1,6 +1,6 @@
 package kg.koronastaff.staffapp.ui.quarantine;
 
-import androidx.lifecycle.ViewModelProviders;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
 
@@ -14,24 +14,24 @@ import android.view.ViewGroup;
 
 import kg.koronastaff.staffapp.R;
 
-public class Quarantine extends Fragment {
+public class QuarantineFragment extends Fragment {
 
     private QuarantineViewModel mViewModel;
 
-    public static Quarantine newInstance() {
-        return new Quarantine();
+    public static QuarantineFragment newInstance() {
+        return new QuarantineFragment();
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.quarantine_fragment, container, false);
+        return inflater.inflate(R.layout.fragment_quarantine, container, false);
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = ViewModelProviders.of(this).get(QuarantineViewModel.class);
+        mViewModel = new ViewModelProvider(this).get(QuarantineViewModel.class);
         // TODO: Use the ViewModel
     }
 

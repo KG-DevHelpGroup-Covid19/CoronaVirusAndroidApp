@@ -3,41 +3,50 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/nav_home">
+    app:startDestination="@+id/menu_news">
 
     <fragment
-        android:id="@+id/nav_home"
+        android:id="@+id/menu_news"
         android:name="kg.koronastaff.staffapp.ui.home.HomeFragment"
-        android:label="@string/menu_home"
+        android:label="@string/menu_news"
         tools:layout="@layout/fragment_home">
-
-        <action
-            android:id="@+id/action_HomeFragment_to_HomeSecondFragment"
-            app:destination="@id/nav_home_second" />
     </fragment>
     <fragment
-        android:id="@+id/nav_home_second"
-        android:name="kg.koronastaff.staffapp.ui.home.HomeSecondFragment"
-        android:label="@string/home_second"
-        tools:layout="@layout/fragment_home_second">
-        <action
-            android:id="@+id/action_HomeSecondFragment_to_HomeFragment"
-            app:destination="@id/nav_home" />
-
-        <argument
-            android:name="myArg"
-            app:argType="string" />
+        android:id="@+id/menu_map_help"
+        android:name="kg.koronastaff.staffapp.ui.contacts.Contacts"
+        android:label="@string/menu_contact"
+        tools:layout="@layout/fragment_cotacts">
     </fragment>
 
     <fragment
-        android:id="@+id/nav_gallery"
+        android:id="@+id/menu_tips_voz"
+        android:name="kg.koronastaff.staffapp.ui.tips.TipsFragment"
+        android:label="@string/menu_tips_voz"
+        tools:layout="@layout/fragment_tips" />
+
+    <fragment
+        android:id="@+id/menu_quations_covid19"
+        android:name="kg.koronastaff.staffapp.ui.faq.FAQFragment"
+        android:label="@string/menu_quations_covid19"
+        tools:layout="@layout/fragment_faq" />
+
+    <fragment
+        android:id="@+id/menu_quarantine"
+        android:name="kg.koronastaff.staffapp.ui.quarantine.QuarantineFragment"
+        android:label="@string/menu_quarantine"
+        tools:layout="@layout/fragment_quarantine" />
+
+
+    <fragment
+        android:id="@+id/menu_fake"
         android:name="kg.koronastaff.staffapp.ui.fakenews.FakenewsFragment"
-        android:label="@string/menu_gallery"
+        android:label="@string/menu_fake"
         tools:layout="@layout/fragment_fakenews" />
 
     <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="kg.koronastaff.staffapp.ui.faq.FAQFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_faq" />
+        android:id="@+id/menu_contact"
+        android:name="kg.koronastaff.staffapp.ui.contacts.Contacts"
+        android:label="@string/menu_contact"
+        tools:layout="@layout/fragment_cotacts" />
+
 </navigation>
