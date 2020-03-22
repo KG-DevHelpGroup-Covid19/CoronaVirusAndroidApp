@@ -24,7 +24,7 @@ interface BackEndService {
     fun getQuarantineSteps(): Observable<ApiResponse<ArrayList<QuarantineSteps>?>>?
 
     @GET("api/stat")
-    fun getStat(): Observable<ApiResponse<Stat>>
+    fun getStat(): Observable<ApiResponse<ArrayList<Stat>>>
 
     @GET("api/cities")
     fun getCities(): Observable<ApiResponse<ArrayList<City>>>?

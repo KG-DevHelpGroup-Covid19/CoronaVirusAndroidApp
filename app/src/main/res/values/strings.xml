@@ -126,4 +126,5 @@
     <string name="test_positive">10. Заполните анкету о себе</string>
     <string name="test_positive_second">В случае потверждения у вас всех признаков covid 19 просим вас запонить анкету</string>
     <string name="google_maps">Открыть в Google Maps</string>
+    <string name="net_problem">Проблемы с связью попробуйте обновить страницу</string>
 </resources>

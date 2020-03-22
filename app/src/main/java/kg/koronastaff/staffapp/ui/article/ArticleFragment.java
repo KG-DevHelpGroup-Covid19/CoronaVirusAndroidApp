@@ -23,7 +23,6 @@ import kg.koronastaff.staffapp.R;
 
 public class ArticleFragment extends Fragment {
     private int articleId = 0;
-    private ArticleViewModel mViewModel;
 
     TextView articleTitle;
 
@@ -35,16 +34,14 @@ public class ArticleFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.article_fragment, container, false);
-        articleTitle= root.findViewById(R.id.article_label);
+        articleTitle = root.findViewById(R.id.article_label);
         return root;
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(ArticleViewModel.class);
-        // TODO: Use the ViewModel
-        App app = (App) getActivity().getApplication();
+        App app = (App) Objects.requireNonNull(getActivity()).getApplication();
         articleTitle.setText(app.getData("article"));
         articleTitle.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.menu_news));
     }

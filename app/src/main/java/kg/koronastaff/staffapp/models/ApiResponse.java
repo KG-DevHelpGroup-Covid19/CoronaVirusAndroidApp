@@ -1,10 +1,10 @@
 package kg.koronastaff.staffapp.models;
 
 public class ApiResponse<T> {
-    T results;
-    Object next;
-    Object previous;
-    int count;
+    private T results;
+    private Object next;
+    private Object previous;
+    private int count;
 
     public ApiResponse() {
     }

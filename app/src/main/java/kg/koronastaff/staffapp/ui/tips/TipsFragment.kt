@@ -10,29 +10,35 @@ import androidx.recyclerview.widget.RecyclerView
 import kg.koronastaff.staffapp.R
 import kg.koronastaff.staffapp.adapters.TipsAdapter
 import kg.koronastaff.staffapp.models.Tips
+import kg.koronastaff.staffapp.ui.FragmentWithStat
 import java.util.*
 
-class TipsFragment : Fragment() {
+class TipsFragment : FragmentWithStat() {
 
     private lateinit var recyclerViewTips: RecyclerView
-    private var mAdapter: RecyclerView.Adapter<*>? = null
-    private var layoutManager: RecyclerView.LayoutManager? = null
+    private lateinit var mAdapter: TipsAdapter
+    private var viewManager: RecyclerView.LayoutManager? = null
 
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
+        super.onCreateView(inflater, container, savedInstanceState)
         val rootView = inflater.inflate(R.layout.fragment_tips, container, false)
 
-        recyclerViewTips = rootView.findViewById(R.id.tips_recycler)
-        layoutManager = LinearLayoutManager(context)
-        recyclerViewTips.setLayoutManager(layoutManager)
+        viewManager = LinearLayoutManager(context)
 
-        val list = ArrayList<Tips>()
-        list.add(Tips("Tip 1", "body", ""))
-        list.add(Tips("Tip 2", "body", ""))
+        mAdapter = TipsAdapter(arrayListOf())
 
-        mAdapter = TipsAdapter(list)
-        recyclerViewTips.setAdapter(mAdapter)
+        recyclerViewTips = rootView.findViewById<RecyclerView>(R.id.tips_recycler).apply {
+            setHasFixedSize(true)
+            layoutManager = viewManager
+            adapter = mAdapter
+        }
+
+        super.coronaViewModel.getTips()?.subscribe{
+            mAdapter.update(it.results!!)
+        }
+
         return rootView
     }
 }

@@ -1,41 +1,37 @@
-package kg.koronastaff.staffapp.ui.news
+package kg.koronastaff.staffapp.ui.map
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kg.koronastaff.staffapp.R
-import kg.koronastaff.staffapp.adapters.NewsAdapter
-import kg.koronastaff.staffapp.ui.FragmentWithStat
-import java.util.*
+import kg.koronastaff.staffapp.adapters.MapsAdapter
+import kg.koronastaff.staffapp.ui.CoronaViewModel
 
-class NewsFragment : FragmentWithStat() {
+class MapFragment : Fragment() {
     private var recyclerView: RecyclerView? = null
-    private lateinit var mAdapter: NewsAdapter
+    private var viewModel: CoronaViewModel? = null
+    private lateinit var mAdapter: MapsAdapter
     private var viewManager: RecyclerView.LayoutManager? = null
-
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?, savedInstanceState: Bundle?): View? {
-
-        super.onCreateView(inflater, container, savedInstanceState)
-
-        val rootView = inflater.inflate(R.layout.fragment_news, container, false)
+        viewModel = ViewModelProvider(this).get(CoronaViewModel::class.java)
+        val rootView = inflater.inflate(R.layout.fragment_map, container, false)
         viewManager = LinearLayoutManager(context)
 
-        mAdapter = NewsAdapter(ArrayList(), activity!!)
-
-        recyclerView = rootView.findViewById<RecyclerView>(R.id.news_list_recycler).apply {
+        mAdapter = MapsAdapter(arrayListOf(), activity)
+        recyclerView = rootView.findViewById<RecyclerView>(R.id.map_recycler_view).apply {
             setHasFixedSize(true)
             layoutManager = viewManager
             adapter = mAdapter
         }
 
-        super.coronaViewModel.getNews()?.subscribe {
-            mAdapter.update(it.results!!)
-        }
-
         return rootView
     }
+
+
 }

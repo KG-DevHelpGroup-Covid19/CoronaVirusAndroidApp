@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
                 .build()
         NavigationUI.setupWithNavController(navigationView, navController)
         val rightToggle = toolbar.findViewById<ImageView>(R.id.toggle)
-        rightToggle.setOnClickListener { v: View? ->
+        rightToggle.setOnClickListener {
             if (drawer.isDrawerOpen(Gravity.LEFT)) {
                 drawer.closeDrawer(Gravity.LEFT)
             } else {
