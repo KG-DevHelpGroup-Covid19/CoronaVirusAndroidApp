@@ -38,8 +38,8 @@ public class MapFragment extends Fragment {
         recyclerViewMap.setLayoutManager(layoutManager);
 
         ArrayList<StationMap> list = new ArrayList<>();
-        list.add(new StationMap(0, "биш", "0", "www", 1.1, 1.1));
-        mAdapter = new MapsAdapter(list);
+        list.add(new StationMap(0, "биш", "0", "www", 42.859235, 74.568830));
+        mAdapter = new MapsAdapter(list, getActivity());
         recyclerViewMap.setAdapter(mAdapter);
 
         return rootView;

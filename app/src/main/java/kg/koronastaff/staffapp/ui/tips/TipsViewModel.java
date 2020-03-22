@@ -1,4 +1,7 @@
 package kg.koronastaff.staffapp.ui.tips;
 
-public class TipsViewModel {
+import androidx.lifecycle.ViewModel;
+
+public class TipsViewModel extends ViewModel {
+
 }
