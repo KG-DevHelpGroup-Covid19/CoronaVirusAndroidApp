@@ -23,16 +23,16 @@ class FakenewsFragment : FragmentWithStat() {
         super.onCreateView(inflater, container, savedInstanceState)
         val root = inflater.inflate(R.layout.fragment_fakenews, container, false)
         viewManager = LinearLayoutManager(context)
-        mAdapter = FakeNewsAdapter(arrayListOf())
+        mAdapter = FakeNewsAdapter(arrayListOf(), activity!!)
         recyclerView = root.findViewById<RecyclerView>(R.id.fake_news_recycler).apply {
             setHasFixedSize(true)
             layoutManager = viewManager
             adapter = mAdapter
         }
-        mAdapter = FakeNewsAdapter(arrayListOf())
+        mAdapter = FakeNewsAdapter(arrayListOf(), activity!!)
 
         super.coronaViewModel.getFakeNews()?.subscribe{
-            mAdapter.update(it.results)
+            mAdapter.update(it.results!!)
         }
 
         return root

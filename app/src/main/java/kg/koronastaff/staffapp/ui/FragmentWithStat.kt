@@ -12,6 +12,7 @@ import kg.koronastaff.staffapp.R
 import kg.koronastaff.staffapp.models.Stat
 import kotlinx.android.synthetic.main.stat_item.*
 
+
 open class FragmentWithStat : Fragment(){
     lateinit var coronaViewModel: CoronaViewModel
     override fun onCreateView(inflater: LayoutInflater,
@@ -23,7 +24,11 @@ open class FragmentWithStat : Fragment(){
     }
 
     private fun updateStat(){
-        coronaViewModel.getStat().subscribe(
+        coronaViewModel.getStat()
+                .doOnError{
+                    showError("");
+                }
+                .subscribe(
                 { result -> showResult(result.results[0]) },
                 { error -> showError(error.message) }
         )

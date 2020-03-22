@@ -36,7 +36,7 @@ class FAQFragment : FragmentWithStat() {
         }
 
         super.coronaViewModel.getFAQ()?.subscribe{
-            mAdapter.update(it.results)
+            mAdapter.update(it.results!!)
         }
 
         root.go_to_test_action.setOnClickListener {

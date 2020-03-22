@@ -23,7 +23,7 @@ class MapFragment : Fragment() {
         val rootView = inflater.inflate(R.layout.fragment_map, container, false)
         viewManager = LinearLayoutManager(context)
 
-        mAdapter = MapsAdapter(arrayListOf(), activity)
+        mAdapter = MapsAdapter(arrayListOf(), activity!!)
         recyclerView = rootView.findViewById<RecyclerView>(R.id.map_recycler_view).apply {
             setHasFixedSize(true)
             layoutManager = viewManager
