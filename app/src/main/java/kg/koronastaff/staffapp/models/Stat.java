@@ -3,12 +3,12 @@ package kg.koronastaff.staffapp.models;
 public class Stat {
     String infected;
     String recovered;
-    String dead;
+    String died;
 
     public Stat(String infected, String recovered, String dead) {
         this.infected = infected;
         this.recovered = recovered;
-        this.dead = dead;
+        this.died = dead;
     }
 
     public Stat() {
@@ -30,11 +30,11 @@ public class Stat {
         this.recovered = recovered;
     }
 
-    public String getDead() {
-        return dead;
+    public String getDied() {
+        return died;
     }
 
     public void setDead(String dead) {
-        this.dead = dead;
+        this.died = died;
     }
 }

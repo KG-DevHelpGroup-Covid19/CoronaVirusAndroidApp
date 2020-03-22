@@ -4,16 +4,13 @@ public class News {
     int id;
     String title;
     String body;
-    int timestamp;
+    String created_at;
 
-    public News(int id, String title, String body, int timestamp) {
+    public News(int id, String title, String body, String created_at) {
         this.id = id;
         this.title = title;
         this.body = body;
-        this.timestamp = timestamp;
-    }
-
-    public News() {
+        this.created_at = created_at;
     }
 
     public int getId() {
@@ -40,11 +37,11 @@ public class News {
         this.body = body;
     }
 
-    public int getTimestamp() {
-        return timestamp;
+    public String getCreated_at() {
+        return created_at;
     }
 
-    public void setTimestamp(int timestamp) {
-        this.timestamp = timestamp;
+    public void setCreated_at(String created_at) {
+        this.created_at = created_at;
     }
 }

@@ -1,41 +1,40 @@
-package kg.koronastaff.staffapp.ui.news
+package kg.koronastaff.staffapp.ui.fakenews
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kg.koronastaff.staffapp.R
-import kg.koronastaff.staffapp.adapters.NewsAdapter
+import kg.koronastaff.staffapp.adapters.FakeNewsAdapter
+import kg.koronastaff.staffapp.models.FakeNews
 import kg.koronastaff.staffapp.ui.FragmentWithStat
 import java.util.*
 
-class NewsFragment : FragmentWithStat() {
+class FakenewsFragment : FragmentWithStat() {
     private var recyclerView: RecyclerView? = null
-    private lateinit var mAdapter: NewsAdapter
+    private lateinit var mAdapter: FakeNewsAdapter
     private var viewManager: RecyclerView.LayoutManager? = null
-
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?, savedInstanceState: Bundle?): View? {
-
         super.onCreateView(inflater, container, savedInstanceState)
-
-        val rootView = inflater.inflate(R.layout.fragment_news, container, false)
+        val root = inflater.inflate(R.layout.fragment_fakenews, container, false)
         viewManager = LinearLayoutManager(context)
-
-        mAdapter = NewsAdapter(ArrayList(), activity!!)
-
-        recyclerView = rootView.findViewById<RecyclerView>(R.id.news_list_recycler).apply {
+        mAdapter = FakeNewsAdapter(arrayListOf())
+        recyclerView = root.findViewById<RecyclerView>(R.id.fake_news_recycler).apply {
             setHasFixedSize(true)
             layoutManager = viewManager
             adapter = mAdapter
         }
+        mAdapter = FakeNewsAdapter(arrayListOf())
 
-        super.coronaViewModel.getNews()?.subscribe {
-            mAdapter.update(it.results!!)
+        super.coronaViewModel.getFakeNews()?.subscribe{
+            mAdapter.update(it.results)
         }
 
-        return rootView
+        return root
     }
 }
