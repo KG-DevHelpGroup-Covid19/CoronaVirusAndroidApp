@@ -49,10 +49,8 @@ public class FAQFragment extends Fragment {
 
         Button b = root.findViewById(R.id.go_to_test_action);
 
-        b.setOnClickListener(view -> {
-            Navigation.findNavController(view).navigate(R.id.tests_fragment);
-        });
-
+        b.setOnClickListener(
+                view -> Navigation.findNavController(view).navigate(R.id.tests_fragment));
         return root;
     }
 
