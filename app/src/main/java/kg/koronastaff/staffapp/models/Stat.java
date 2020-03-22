@@ -1,11 +1,11 @@
 package kg.koronastaff.staffapp.models;
 
 public class Stat {
-    int infected;
-    int recovered;
-    int dead;
+    String infected;
+    String recovered;
+    String dead;
 
-    public Stat(int infected, int recovered, int dead) {
+    public Stat(String infected, String recovered, String dead) {
         this.infected = infected;
         this.recovered = recovered;
         this.dead = dead;
@@ -14,27 +14,27 @@ public class Stat {
     public Stat() {
     }
 
-    public int getInfected() {
+    public String getInfected() {
         return infected;
     }
 
-    public void setInfected(int infected) {
+    public void setInfected(String infected) {
         this.infected = infected;
     }
 
-    public int getRecovered() {
+    public String getRecovered() {
         return recovered;
     }
 
-    public void setRecovered(int recovered) {
+    public void setRecovered(String recovered) {
         this.recovered = recovered;
     }
 
-    public int getDead() {
+    public String getDead() {
         return dead;
     }
 
-    public void setDead(int dead) {
+    public void setDead(String dead) {
         this.dead = dead;
     }
 }

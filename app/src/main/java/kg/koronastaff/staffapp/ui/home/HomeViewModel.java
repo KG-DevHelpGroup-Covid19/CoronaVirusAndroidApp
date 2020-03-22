@@ -1,19 +1,18 @@
 package kg.koronastaff.staffapp.ui.home;
 
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
+
+import java.util.Observable;
 
 public class HomeViewModel extends ViewModel {
 
-    private MutableLiveData<String> mText;
+    private Observable mText;
 
     public HomeViewModel() {
-        mText = new MutableLiveData<>();
-        mText.setValue("This is home fragment");
+        mText = new Observable();
     }
 
-    public LiveData<String> getText() {
+    public Observable getText() {
         return mText;
     }
 }
