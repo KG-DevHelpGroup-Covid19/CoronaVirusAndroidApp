@@ -49,7 +49,7 @@ public class NewsFragment extends Fragment {
 
         ArrayList<News> list = new ArrayList<>();
         list.add(new News(1, "title", "", 1));
-        mAdapter = new NewsAdapter(list);
+        mAdapter = new NewsAdapter(list, getActivity());
         recyclerView.setAdapter(mAdapter);
 
         return rootView;
