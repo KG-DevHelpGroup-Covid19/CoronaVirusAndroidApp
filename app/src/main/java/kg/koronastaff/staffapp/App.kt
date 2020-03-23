@@ -8,7 +8,7 @@ import java.util.*
 
 
 class App : Application() {
-    private val data = HashMap<String, String>()
+    private val data = HashMap<String, Any>()
     @SuppressLint("ShowToast")
     override fun onCreate() {
         super.onCreate()
@@ -17,11 +17,11 @@ class App : Application() {
         }
     }
 
-    fun getData(key: String?): String? {
+    fun getData(key: String?): Any? {
         return data[key]
     }
 
-    fun putData(key: String, value: String) {
+    fun putData(key: String, value: Any) {
         data[key] = value
     }
 }

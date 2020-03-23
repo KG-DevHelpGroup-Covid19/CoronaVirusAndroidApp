@@ -39,8 +39,15 @@ class NewsFragment : FragmentWithStat() {
             Toast.makeText(activity, getString(R.string.net_problem), Toast.LENGTH_LONG)
         }?.subscribe {
             mAdapter.update(it.results!!)
+            cache.saveNews(it.results!!)
         }
 
         return rootView
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        super.updateStats(cache.getStat())
+        mAdapter.update(cache.getNews())
     }
 }

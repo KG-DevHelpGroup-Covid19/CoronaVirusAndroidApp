@@ -12,6 +12,8 @@ class CoronaViewModel : ViewModel(){
         NetworkService().create()
     }
 
+    
+
     fun getStat(): Observable<ApiResponse<ArrayList<Stat>>> {
         return apiServe.getStat()
                 .subscribeOn(Schedulers.io())

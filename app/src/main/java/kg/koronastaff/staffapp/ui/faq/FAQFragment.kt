@@ -27,7 +27,9 @@ class FAQFragment : FragmentWithStat() {
 
         val root = inflater.inflate(R.layout.fragment_faq, container, false)
         viewManager = LinearLayoutManager(context)
-        mAdapter = FAQAdapter(arrayListOf())
+        mAdapter = FAQAdapter(super.cache.getFaq())
+
+
 
         recyclerView = root.findViewById<RecyclerView>(R.id.faq_news_recycler).apply {
             setHasFixedSize(true)
@@ -35,13 +37,21 @@ class FAQFragment : FragmentWithStat() {
             adapter = mAdapter
         }
 
+
+
         super.coronaViewModel.getFAQ()?.subscribe{
             mAdapter.update(it.results!!)
+            super.cache.saveFaq(it.results!!)
         }
 
         root.go_to_test_action.setOnClickListener {
             view -> Navigation.findNavController(view!!).navigate(R.id.tests_fragment) }
 
         return root
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        super.updateStats(cache.getStat())
     }
 }

@@ -40,7 +40,7 @@ class NewsAdapter(private var mDataset: ArrayList<News>, var parent: FragmentAct
         holder.frame.fake_body.text = b
         holder.frame.fake_news_time.text = news.created_at
         holder.frame.setOnClickListener { v: View? ->
-            app.putData("article", news.id.toString())
+            app.putData("article", news)
             Navigation.findNavController(v!!).navigate(R.id.article)
         }
     }

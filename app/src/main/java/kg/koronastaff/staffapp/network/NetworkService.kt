@@ -9,7 +9,7 @@ class NetworkService {
         val retrofit = Retrofit.Builder()
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
-                .baseUrl("http://b71a1b3a.ngrok.io")
+                .baseUrl("http://161.35.29.139:46274/")
                 .build()
 
         return retrofit.create(BackEndService::class.java)

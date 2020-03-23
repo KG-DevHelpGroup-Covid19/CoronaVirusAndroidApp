@@ -11,14 +11,17 @@ import androidx.recyclerview.widget.RecyclerView
 import kg.koronastaff.staffapp.R
 import kg.koronastaff.staffapp.adapters.MapsAdapter
 import kg.koronastaff.staffapp.ui.CoronaViewModel
+import kg.koronastaff.staffapp.ui.FragmentWithStat
 
-class MapFragment : Fragment() {
+class MapFragment : FragmentWithStat() {
     private var recyclerView: RecyclerView? = null
     private var viewModel: CoronaViewModel? = null
     private lateinit var mAdapter: MapsAdapter
     private var viewManager: RecyclerView.LayoutManager? = null
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?, savedInstanceState: Bundle?): View? {
+
+        super.onCreateView(inflater, container, savedInstanceState)
         viewModel = ViewModelProvider(this).get(CoronaViewModel::class.java)
         val rootView = inflater.inflate(R.layout.fragment_map, container, false)
         viewManager = LinearLayoutManager(context)
@@ -33,5 +36,8 @@ class MapFragment : Fragment() {
         return rootView
     }
 
-
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        super.updateStats(cache.getStat())
+    }
 }
