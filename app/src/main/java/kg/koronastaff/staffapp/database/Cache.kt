@@ -19,6 +19,22 @@ class Cache(var context: Context) {
     private val faqNode = "faq"
     private val statNode = "stat"
     private val newsNoe = "news"
+    private val selectedCityNode = "city"
+
+    fun saveSelectedCity(city: City){
+        val myPrefs = context.getSharedPreferences(prefsNode, MODE_PRIVATE).edit()
+        myPrefs.putString(selectedCityNode, gson.toJson(city))
+        myPrefs.apply()
+    }
+
+    fun getSelectedCity(): City{
+        val myPrefs = context.getSharedPreferences(prefsNode, MODE_PRIVATE)
+        val listJson = myPrefs.getString(selectedCityNode, "")
+        if (listJson == ""){
+            return City("0", 0)
+        }
+        return gson.fromJson(listJson, City::class.java)
+    }
 
     @SuppressLint("CommitPrefEdits")
     fun saveCities(list: ArrayList<City>){

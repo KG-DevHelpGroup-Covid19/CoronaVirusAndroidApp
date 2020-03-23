@@ -31,8 +31,9 @@ class ArticleFragment : FragmentWithStat() {
 
         article_label.text = news.title
         news_time.text = news.created_at
-        news_body.text = Html.fromHtml(news.body)
-
+        news_body.text = news.body
+        article_link.text = news.source_news
         article_label.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.menu_news))
+        back_button.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.menu_news))
     }
 }

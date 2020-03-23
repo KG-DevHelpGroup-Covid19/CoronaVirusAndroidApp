@@ -127,4 +127,6 @@
     <string name="test_positive_second">В случае потверждения у вас всех признаков covid 19 просим вас запонить анкету</string>
     <string name="google_maps">Открыть в Google Maps</string>
     <string name="net_problem">Проблемы с связью попробуйте обновить страницу</string>
+    <string name="back">назад</string>
+    <string name="stations_not_found_text">Мы не нашли пукты по указанному городу</string>
 </resources>
