@@ -37,15 +37,12 @@ class FAQFragment : FragmentWithStat() {
             adapter = mAdapter
         }
 
-
-
         super.coronaViewModel.getFAQ()?.subscribe{
             mAdapter.update(it.results!!)
             super.cache.saveFaq(it.results!!)
         }
 
-        root.go_to_test_action.setOnClickListener {
-            view -> Navigation.findNavController(view!!).navigate(R.id.tests_fragment) }
+        root.go_to_test_action.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.tests_fragment))
 
         return root
     }

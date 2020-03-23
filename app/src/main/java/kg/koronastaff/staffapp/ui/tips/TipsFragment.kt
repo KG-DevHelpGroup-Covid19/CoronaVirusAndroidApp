@@ -25,9 +25,9 @@ class TipsFragment : FragmentWithStat() {
         super.onCreateView(inflater, container, savedInstanceState)
         val rootView = inflater.inflate(R.layout.fragment_tips, container, false)
 
-        viewManager = LinearLayoutManager(context)
+        viewManager = LinearLayoutManager(context) as RecyclerView.LayoutManager?
 
-        mAdapter = TipsAdapter(arrayListOf())
+        mAdapter = TipsAdapter(arrayListOf(), activity!!)
 
         recyclerViewTips = rootView.findViewById<RecyclerView>(R.id.tips_recycler).apply {
             setHasFixedSize(true)
@@ -46,4 +46,6 @@ class TipsFragment : FragmentWithStat() {
         super.onActivityCreated(savedInstanceState)
         super.updateStats(cache.getStat())
     }
+
+
 }

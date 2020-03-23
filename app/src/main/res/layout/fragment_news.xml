@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:background="@color/grey_background"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/nested_scroll"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <RelativeLayout
@@ -34,6 +36,20 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     app:layout_constraintTop_toBottomOf="@+id/news_label"/>
+
+                <ProgressBar
+                    android:id="@+id/progressBar"
+                    style="?android:attr/progressBarStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="30dp"
+                    app:layout_constraintTop_toBottomOf="@+id/news_list_recycler" />
+
+
             </androidx.constraintlayout.widget.ConstraintLayout>
         </RelativeLayout>
     </androidx.core.widget.NestedScrollView>
