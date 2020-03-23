@@ -13,4 +13,9 @@ class ContactsFragment : FragmentWithStat() {
         super.onCreateView(inflater, container, savedInstanceState)
         return inflater.inflate(R.layout.fragment_cotacts, container, false)
     }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        super.updateStats(cache.getStat())
+    }
 }

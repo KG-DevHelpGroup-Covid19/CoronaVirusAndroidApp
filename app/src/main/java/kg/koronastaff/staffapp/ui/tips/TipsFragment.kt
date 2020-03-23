@@ -41,4 +41,9 @@ class TipsFragment : FragmentWithStat() {
 
         return rootView
     }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        super.updateStats(cache.getStat())
+    }
 }

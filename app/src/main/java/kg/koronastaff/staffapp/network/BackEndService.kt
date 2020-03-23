@@ -26,8 +26,11 @@ interface BackEndService {
     @GET("api/stat")
     fun getStat(): Observable<ApiResponse<ArrayList<Stat>>>
 
-    @GET("api/cities")
+    @GET("api/location/city")
     fun getCities(): Observable<ApiResponse<ArrayList<City>>>?
+
+    @GET("api/location/region")
+    fun getRegions(): Observable<ApiResponse<ArrayList<Region>>>?
 
     @GET("api/test")
     fun getTests(): Observable<ApiResponse<ArrayList<String>>>?
@@ -35,8 +38,8 @@ interface BackEndService {
     @POST("api/test")
     fun sendTestResults(@Body results: TestResults): Observable<ApiResponse<ApiStatus>>
 
-    @GET("api/cities/{city}/stations")
-    fun getStations(@Path("city") cityId: Int):
+    @GET("api/city/{city}/stations")
+    fun getStationsByCityId(@Path("city") cityId: Int):
             Observable<ApiResponse<ArrayList<StationMap>>>?
 
 }

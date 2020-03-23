@@ -10,14 +10,16 @@ import androidx.recyclerview.widget.RecyclerView
 import kg.koronastaff.staffapp.R
 import kg.koronastaff.staffapp.adapters.QuarantineAdapter
 import kg.koronastaff.staffapp.models.QuarantineSteps
+import kg.koronastaff.staffapp.ui.FragmentWithStat
 import java.util.*
 
-class QuarantineFragment : Fragment() {
+class QuarantineFragment : FragmentWithStat() {
     private var recyclerView: RecyclerView? = null
     private var mAdapter: RecyclerView.Adapter<*>? = null
     private var viewManager: RecyclerView.LayoutManager? = null
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
+        super.onCreateView(inflater, container, savedInstanceState)
         val root = inflater.inflate(R.layout.fragment_quarantine, container, false)
         recyclerView = root.findViewById(R.id.fake_news_recycler)
         viewManager = LinearLayoutManager(context)
@@ -30,5 +32,10 @@ class QuarantineFragment : Fragment() {
             adapter = mAdapter
         }
         return root
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        super.updateStats(cache.getStat())
     }
 }

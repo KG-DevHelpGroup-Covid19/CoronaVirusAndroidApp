@@ -1,6 +1,5 @@
 package kg.koronastaff.staffapp.adapters
 
-import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,17 +10,16 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import kg.koronastaff.staffapp.App
 import kg.koronastaff.staffapp.R
-import kg.koronastaff.staffapp.models.News
+import kg.koronastaff.staffapp.models.FakeNews
 import kotlinx.android.synthetic.main.fake_news_item.view.*
 import java.util.*
 
-class NewsAdapter(private var mDataset: ArrayList<News>, var parent: FragmentActivity) :
-        RecyclerView.Adapter<NewsAdapter.MyViewHolder>() {
-
-    var app: App = parent.application as App
+class FakeNewsAdapter(private var mDataset: ArrayList<FakeNews>, var parent: FragmentActivity) :
+        RecyclerView.Adapter<FakeNewsAdapter.MyViewHolder>() {
 
     class MyViewHolder(var frame: CardView) : RecyclerView.ViewHolder(frame)
 
+    var app: App = parent.application as App
     override fun onCreateViewHolder(
             parent: ViewGroup, viewType: Int): MyViewHolder {
         val v = LayoutInflater.from(parent.context)
@@ -29,7 +27,6 @@ class NewsAdapter(private var mDataset: ArrayList<News>, var parent: FragmentAct
         return MyViewHolder(v)
     }
 
-    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val news = mDataset[position]
         holder.frame.fake_text.text = news.title
@@ -40,7 +37,7 @@ class NewsAdapter(private var mDataset: ArrayList<News>, var parent: FragmentAct
         holder.frame.fake_body.text = b
         holder.frame.fake_news_time.text = news.created_at
         holder.frame.setOnClickListener { v: View? ->
-            app.putData("article", news)
+            app.putData("article", news.id.toString())
             Navigation.findNavController(v!!).navigate(R.id.article)
         }
     }
@@ -49,7 +46,7 @@ class NewsAdapter(private var mDataset: ArrayList<News>, var parent: FragmentAct
         return mDataset.size
     }
 
-    fun update(myDataset: ArrayList<News>) {
+    fun update(myDataset: ArrayList<FakeNews>) {
         mDataset = myDataset
         notifyDataSetChanged()
     }

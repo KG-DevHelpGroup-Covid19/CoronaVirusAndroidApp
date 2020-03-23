@@ -1,9 +1,11 @@
 package kg.koronastaff.staffapp.ui.news
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kg.koronastaff.staffapp.R
@@ -16,6 +18,7 @@ class NewsFragment : FragmentWithStat() {
     private lateinit var mAdapter: NewsAdapter
     private var viewManager: RecyclerView.LayoutManager? = null
 
+    @SuppressLint("ShowToast")
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
@@ -32,10 +35,19 @@ class NewsFragment : FragmentWithStat() {
             adapter = mAdapter
         }
 
-        super.coronaViewModel.getNews()?.subscribe {
+        super.coronaViewModel.getNews()?.doOnError{
+            Toast.makeText(activity, getString(R.string.net_problem), Toast.LENGTH_LONG)
+        }?.subscribe {
             mAdapter.update(it.results!!)
+            cache.saveNews(it.results!!)
         }
 
         return rootView
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        super.updateStats(cache.getStat())
+        mAdapter.update(cache.getNews())
     }
 }
