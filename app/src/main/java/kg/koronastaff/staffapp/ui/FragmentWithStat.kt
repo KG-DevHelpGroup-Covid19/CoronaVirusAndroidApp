@@ -16,7 +16,7 @@ import kotlinx.android.synthetic.main.stat_item.*
 
 open class FragmentWithStat : Fragment(){
     lateinit var coronaViewModel: CoronaViewModel
-    lateinit var cache: Cache
+    open lateinit var cache: Cache
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?, savedInstanceState: Bundle?): View? {
         coronaViewModel = ViewModelProvider(this).get(CoronaViewModel::class.java)

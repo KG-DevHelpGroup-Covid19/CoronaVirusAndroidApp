@@ -12,9 +12,7 @@ class App : Application() {
     @SuppressLint("ShowToast")
     override fun onCreate() {
         super.onCreate()
-        RxJavaPlugins.setErrorHandler {
-            Toast.makeText(baseContext, getString(R.string.net_problem), Toast.LENGTH_LONG)
-        }
+        RxJavaPlugins.setErrorHandler {}
     }
 
     fun getData(key: String?): Any? {

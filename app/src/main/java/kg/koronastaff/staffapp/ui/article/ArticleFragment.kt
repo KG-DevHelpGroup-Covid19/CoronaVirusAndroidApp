@@ -33,7 +33,7 @@ class ArticleFragment : FragmentWithStat() {
         news_time.text = news.created_at
         news_body.text = news.body
         article_link.text = news.source_news
-        article_label.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.menu_news))
-        back_button.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.menu_news))
+        article_label.setOnClickListener{activity!!.onBackPressed()}
+        back_button.setOnClickListener{activity!!.onBackPressed()}
     }
 }

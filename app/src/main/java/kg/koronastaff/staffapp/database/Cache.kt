@@ -88,6 +88,12 @@ class Cache(var context: Context) {
         return gson.fromJson(listJson, listType)
     }
 
+    fun addNews(data: ArrayList<News>){
+        val arr = getNews()
+        arr.addAll(data)
+        saveNews(arr)
+    }
+
     fun saveStat(stat: Stat){
         val myPrefs = context.getSharedPreferences(prefsNode, MODE_PRIVATE).edit()
         myPrefs.putString(statNode, gson.toJson(stat))

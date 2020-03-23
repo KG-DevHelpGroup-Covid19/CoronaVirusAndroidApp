@@ -19,7 +19,6 @@ class NewsAdapter(private var mDataset: ArrayList<News>, var parent: FragmentAct
         RecyclerView.Adapter<NewsAdapter.MyViewHolder>() {
 
     var app: App = parent.application as App
-
     class MyViewHolder(var frame: CardView) : RecyclerView.ViewHolder(frame)
 
     override fun onCreateViewHolder(
@@ -34,9 +33,11 @@ class NewsAdapter(private var mDataset: ArrayList<News>, var parent: FragmentAct
         val news = mDataset[position]
         holder.frame.fake_text.text = news.title
         var b = news.body
+
         if (b.length > 199) {
             b = b.substring(0, 200) + "..."
         }
+
         holder.frame.fake_body.text = b
         holder.frame.fake_news_time.text = news.created_at
         holder.frame.setOnClickListener { v: View? ->
@@ -51,6 +52,11 @@ class NewsAdapter(private var mDataset: ArrayList<News>, var parent: FragmentAct
 
     fun update(myDataset: ArrayList<News>) {
         mDataset = myDataset
+        notifyDataSetChanged()
+    }
+
+    fun add(data: ArrayList<News>){
+        mDataset.addAll(data)
         notifyDataSetChanged()
     }
 
