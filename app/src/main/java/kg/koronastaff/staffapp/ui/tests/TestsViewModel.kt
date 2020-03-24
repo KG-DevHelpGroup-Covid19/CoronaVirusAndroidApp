@@ -21,6 +21,14 @@ class TestsViewModel : ViewModel() {
                 .observeOn(AndroidSchedulers.mainThread())
     }
 
+    fun postPollChoice(c: PollChoice): Observable<PollChoice>? {
+        return apiServe.postPollChoice(c).subscribeOn(Schedulers.io())?.observeOn(AndroidSchedulers.mainThread())
+    }
+
+    fun postTestResult(c: TestResults, token: String): Observable<TestResults>? {
+        return apiServe.putUserData(c, token).subscribeOn(Schedulers.io())?.observeOn(AndroidSchedulers.mainThread())
+    }
+
     fun getRegions(): Observable<ApiResponse<ArrayList<Region>>>? {
         return apiServe.getRegions()?.subscribeOn(Schedulers.io())?.observeOn(AndroidSchedulers.mainThread())
     }

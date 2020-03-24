@@ -31,9 +31,6 @@ interface BackEndService {
     @GET("api/polls/")
     fun getTests(): Observable<ApiResponse<ArrayList<TestQuestion>>>
 
-    @POST("api/test")
-    fun sendTestResults(@Body results: TestResults): Observable<ApiResponse<ApiStatus>>
-
     @GET("api/location/city/{city}/stations")
     fun getStationsByCityId(@Path("city") cityId: Int):
             Observable<ApiResponse<ArrayList<StationMap>>>?
@@ -41,4 +38,9 @@ interface BackEndService {
     @GET("api/polls/current_user/")
     fun getUniqueToken(): Observable<Token>
 
+    @POST("api/polls/polls_answer/")
+    fun postPollChoice(@Body p: PollChoice): Observable<PollChoice>
+
+    @PUT("api/polls/current_user/{unique_id}/")
+    fun putUserData(@Body res: TestResults, @Path("unique_id") token: String): Observable<TestResults>
 }

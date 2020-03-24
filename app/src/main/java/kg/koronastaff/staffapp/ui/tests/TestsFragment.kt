@@ -8,9 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.Spinner
+import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
@@ -18,6 +16,7 @@ import kg.koronastaff.staffapp.R
 import kg.koronastaff.staffapp.database.Base
 import kg.koronastaff.staffapp.database.Cache
 import kg.koronastaff.staffapp.models.City
+import kg.koronastaff.staffapp.models.PollChoice
 import kg.koronastaff.staffapp.models.TestQuestion
 import kg.koronastaff.staffapp.models.TestResults
 import kotlinx.android.synthetic.main.fragment_map.*
@@ -27,7 +26,6 @@ import kotlin.collections.ArrayList
 
 class TestsFragment : Fragment() {
     private var questionCount = 0
-    private val questions = ArrayList<String>()
     private var mViewModel: TestsViewModel? = null
     private var sendEnabled = false
     private lateinit var base: Base
@@ -35,22 +33,21 @@ class TestsFragment : Fragment() {
     private lateinit var cities: ArrayList<City>
     private lateinit var cache: Cache
 
+    private var questions: ArrayList<TestQuestion> = arrayListOf()
+
     private lateinit var testRegion: Spinner
     private lateinit var currentCities: ArrayList<City>
 
-    private var testResults: TestResults = TestResults()
+    private var testResults: TestResults = TestResults("", "","","", "", 1, 0)
+
+    private lateinit var root: View
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        val root = inflater.inflate(R.layout.fragment_tests, container, false)
+        root = inflater.inflate(R.layout.fragment_tests, container, false)
         base = Base(activity!!)
         testRegion = root.test_region
         cache = Cache(activity!!)
-
-        mViewModel?.getQuestions()?.subscribe{
-
-        }
-
         return root
     }
 
@@ -58,6 +55,12 @@ class TestsFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         mViewModel = ViewModelProvider(this).get(TestsViewModel::class.java)
         cities = cache.getCities()
+
+        mViewModel!!.getQuestions()?.subscribe{
+            updateQuestions(it.results)
+            updateQuestion(root)
+            root.progressBar2.visibility = View.GONE
+        }
 
         if (cities.size < 1){
             mViewModel!!.getCities()?.subscribe{
@@ -97,52 +100,83 @@ class TestsFragment : Fragment() {
         }
 
         updateToken()
+
+    }
+
+    private fun updateQuestions(list: ArrayList<TestQuestion>){
+        questions = list
+        questions.add(TestQuestion(0, getString(R.string.test_positive),
+                getString(R.string.test_positive_second),
+                arrayListOf(TestQuestion.Choice(0, getString(R.string.test_profile_send), true)), true))
     }
 
     private fun createButtons(list: ArrayList<TestQuestion.Choice>, v: View){
         var i = 0
+        val ll: LinearLayout = buttons_container
+        ll.removeAllViews()
         list.forEach{choice ->
-            var button = v.test_button_1
-            if (i % 2 == 1){
-                button = v.test_button_2
-            }
+            val button = Button(activity!!)
             button.text = choice.sc_value
             button.visibility = View.VISIBLE
             button.setOnClickListener {
                 choose(choice, it)
             }
-            v.buttons_container.addView(button)
+            ll.addView(button, buttons_container.childCount)
             i++
         }
     }
 
+    @SuppressLint("ShowToast")
     private fun choose(choice: TestQuestion.Choice, v: View){
-
+        if (choice.isSend){
+                var age = test_age.text.toString()
+                if (age.isEmpty()) age = "0"
+                testResults.first_name = test_name.text.toString()
+                testResults.last_name = test_surname.text.toString()
+                testResults.age = Integer.parseInt(age)
+                testResults.district = "a"
+                mViewModel!!.postTestResult(testResults, base.getToken()!!)?.subscribe({
+                    Toast.makeText(activity, "результаты отправлены", Toast.LENGTH_LONG).show()
+                    send(v)}, {
+                    Toast.makeText(activity, "error", Toast.LENGTH_LONG).show()
+                    it.printStackTrace()
+                })
+        }else{
+            val res = PollChoice(
+                    base.getToken()!!,
+                    questions[questionCount - 1].id,
+                    choice.id
+            )
+            mViewModel!!.postPollChoice(res)?.subscribe({
+                Toast.makeText(activity, "ответ принят", Toast.LENGTH_LONG).show()
+            }, {
+                base.addPollChoice(res)
+                it.printStackTrace()
+            })
+            updateQuestion(v)
+        }
     }
 
-    private fun nextQuestion(v: View) {
-        if (questions.size == questionCount) {
-            counterUpdate(v)
-            loadTestingAnswer(v)
-            questionCount++
-        } else {
-            counterUpdate(v)
-            v.question.text = questions[questionCount]
-            questionCount++
-        }
+    private fun updateQuestion(v: View){
+        val q = questions[questionCount]
+        question.text = q.title
+        test_additional_text.text = q.description
+        createButtons(q.choices, v)
+        if(q.isLast){loadTestingAnswer(v)}
+        counterUpdate(v)
+        println(questions)
+        questionCount++
     }
 
     @SuppressLint("SetTextI18n")
     private fun counterUpdate(v: View) {
-        v.textView3.text =
+        textView3.text =
                 (questionCount + 1).toString() + " "+
-                        getString(R.string.of) + " " + (questions.size + 1)
+                        getString(R.string.of) + " " + (questions.size)
     }
 
     private fun loadTestingAnswer(v: View) {
-        v.question.text = getString(R.string.test_positive)
-        v.test_additional_text.text = getString(R.string.test_positive_second)
-        v.test_form!!.visibility = View.VISIBLE
+        test_form.visibility = View.VISIBLE
         sendEnabled = true
     }
 
@@ -176,7 +210,7 @@ class TestsFragment : Fragment() {
         currentCities = list
     }
 
-    fun updateSpinnerRegions(list: ArrayList<String>){
+    private fun updateSpinnerRegions(list: ArrayList<String>){
         val listNew = arrayListOf<String>()
         list.forEach{
             listNew.add(it)

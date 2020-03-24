@@ -51,7 +51,10 @@ class NewsFragment : FragmentWithStat() {
             if (scrollY == (v.getChildAt(0).measuredHeight - v.measuredHeight)) {
                 if (!end) {
                     progressBar.visibility = View.VISIBLE
-                    coronaViewModel.getNews(page++)?.subscribe {
+                    coronaViewModel.getNews(page++)?.doOnError {
+                        progressBar.visibility = View.GONE
+                        Toast.makeText(activity, getString(R.string.net_problem), Toast.LENGTH_LONG).show()
+                    }?.subscribe {
                         mAdapter.add(it.results!!)
                         if (it.results!!.size < Const.perPage) {
                             end = true
@@ -66,7 +69,8 @@ class NewsFragment : FragmentWithStat() {
         })
 
         super.coronaViewModel.getNews(page)?.doOnError{
-            Toast.makeText(activity, getString(R.string.net_problem), Toast.LENGTH_LONG)
+            progressBar.visibility = View.GONE
+            Toast.makeText(activity, getString(R.string.net_problem), Toast.LENGTH_LONG).show()
         }?.subscribe {
             if (it.results!!.size < Const.perPage) {
                 end = true
@@ -74,6 +78,7 @@ class NewsFragment : FragmentWithStat() {
             mAdapter.update(it.results!!)
             rootView.nested_scroll.scrollX = 0
             cache.saveNews(it.results!!)
+            progressBar.visibility = View.GONE
         }
 
         return rootView

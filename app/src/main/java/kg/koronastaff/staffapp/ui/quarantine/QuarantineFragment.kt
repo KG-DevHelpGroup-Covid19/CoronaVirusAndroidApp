@@ -24,7 +24,7 @@ class QuarantineFragment : FragmentWithStat() {
         recyclerView = root.findViewById(R.id.fake_news_recycler)
         viewManager = LinearLayoutManager(context)
 
-        mAdapter = QuarantineAdapter(arrayListOf())
+        mAdapter = QuarantineAdapter(arrayListOf(QuarantineSteps(0, getString(R.string.quarantine_title), getString(R.string.quarantine_body))))
 
         recyclerView = root.findViewById<RecyclerView>(R.id.fake_news_recycler).apply {
             setHasFixedSize(true)

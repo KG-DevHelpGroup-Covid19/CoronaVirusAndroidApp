@@ -60,9 +60,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
-                        android:text="tests question?"
+                        android:text=""
                         android:textColor="@color/black"
-                        android:textSize="16sp"
+                        android:textSize="18sp"
                         app:layout_constraintTop_toTopOf="parent"
                         tools:layout_editor_absoluteX="10dp" />
 
@@ -71,7 +71,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
-                        android:text="tests question?"
+                        android:text=""
                         android:textSize="13sp"
                         tools:layout_editor_absoluteX="10dp" />
 
@@ -80,7 +80,7 @@
                         android:id="@+id/test_form"
                         android:layout_width="match_parent"
                         android:layout_margin="10dp"
-                        android:visibility="visible"
+                        android:visibility="gone"
                         android:layout_height="wrap_content">
 
                         <EditText
@@ -153,6 +153,7 @@
                             app:layout_constraintTop_toBottomOf="@id/test_gender" />
 
                         <EditText
+                            android:id="@+id/test_age"
                             android:layout_width="match_parent"
                             android:layout_height="40dp"
                             android:layout_marginTop="20dp"

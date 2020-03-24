@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.AdapterView.OnItemSelectedListener
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kg.koronastaff.staffapp.R
@@ -62,7 +63,9 @@ class MapFragment : FragmentWithStat() {
             }
         }
 
-        viewModel.getStationsByCity(selectId)?.subscribe{
+        viewModel.getStationsByCity(selectId)?.doOnError{
+            Toast.makeText(activity, getString(R.string.net_problem), Toast.LENGTH_LONG).show()
+        }?.subscribe{
             mAdapter.update(it.results)
             Log.d("tag", "results" + it.results)
         }
@@ -73,7 +76,9 @@ class MapFragment : FragmentWithStat() {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 val city = cities[position]
                 cache.saveSelectedCity(city)
-                viewModel.getStationsByCity(city.pk)?.subscribe{
+                viewModel.getStationsByCity(city.pk)?.doOnError{
+                    Toast.makeText(activity, getString(R.string.net_problem), Toast.LENGTH_LONG).show()
+                }?.subscribe{
                     if(it.results.size > 0){
                         not_found_text.visibility = View.GONE
                     }else{
