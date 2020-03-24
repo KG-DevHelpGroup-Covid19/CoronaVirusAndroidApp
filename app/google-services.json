@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "588692191633",
+    "firebase_url": "https://covid19kg-bcb3b.firebaseio.com",
+    "project_id": "covid19kg-bcb3b",
+    "storage_bucket": "covid19kg-bcb3b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:588692191633:android:eb00433721f557b55a4230",
+        "android_client_info": {
+          "package_name": "kg.koronastaff.staffapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "588692191633-ifjv7fik300vr28tba4f203128vio49q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBqwrlQq9WLbUZxwAIzdI7BCrEHTAgIveY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "588692191633-ifjv7fik300vr28tba4f203128vio49q.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
