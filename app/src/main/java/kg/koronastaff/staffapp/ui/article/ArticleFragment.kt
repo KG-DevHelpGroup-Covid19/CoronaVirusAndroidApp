@@ -33,6 +33,7 @@ class ArticleFragment : FragmentWithStat() {
         news_time.text = news.created_at
         news_body.text = news.body
         article_link.text = news.source_news
+        imageView.setOnClickListener { activity!!.onBackPressed() }
         article_label.setOnClickListener{activity!!.onBackPressed()}
         back_button.setOnClickListener{activity!!.onBackPressed()}
     }
