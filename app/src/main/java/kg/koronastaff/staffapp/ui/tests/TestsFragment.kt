@@ -3,12 +3,15 @@ package kg.koronastaff.staffapp.ui.tests
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.*
+import androidx.annotation.RequiresApi
+import androidx.core.view.marginTop
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
@@ -44,10 +47,16 @@ class TestsFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
+
         root = inflater.inflate(R.layout.fragment_tests, container, false)
         base = Base(activity!!)
         testRegion = root.test_region
         cache = Cache(activity!!)
+
+        root.back_button.setOnClickListener {
+            activity!!.onBackPressed()
+        }
+
         return root
     }
 
@@ -116,8 +125,16 @@ class TestsFragment : Fragment() {
         ll.removeAllViews()
         list.forEach{choice ->
             val button = Button(activity!!)
-            button.text = choice.sc_value
-            button.visibility = View.VISIBLE
+            button.apply {
+                val m = ViewGroup.MarginLayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                        ViewGroup.LayoutParams.WRAP_CONTENT)
+                m.topMargin = 30
+                layoutParams = m
+                textSize = 13f
+                text = choice.sc_value
+                visibility = View.VISIBLE
+            }
+            button.setBackgroundResource(R.drawable.button_bordered_background)
             button.setOnClickListener {
                 choose(choice, it)
             }
@@ -138,7 +155,7 @@ class TestsFragment : Fragment() {
                 mViewModel!!.postTestResult(testResults, base.getToken()!!)?.subscribe({
                     Toast.makeText(activity, "результаты отправлены", Toast.LENGTH_LONG).show()
                     send(v)}, {
-                    Toast.makeText(activity, "error", Toast.LENGTH_LONG).show()
+                    Toast.makeText(activity, "ошибка", Toast.LENGTH_LONG).show()
                     it.printStackTrace()
                 })
         }else{
