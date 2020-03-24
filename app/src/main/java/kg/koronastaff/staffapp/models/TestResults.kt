@@ -8,6 +8,4 @@ class TestResults(
         var district: String,
         var sex: Int,
         var age: Int
-){
-    constructor():this("", "","","", "", 1, 0)
-}
+)

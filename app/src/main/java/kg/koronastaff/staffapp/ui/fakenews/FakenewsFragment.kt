@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.widget.NestedScrollView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -57,7 +58,9 @@ class FakenewsFragment : FragmentWithStat() {
             }
         })
         root.progressBar.visibility = View.VISIBLE
-        super.coronaViewModel.getFakeNews(page)?.subscribe{
+        super.coronaViewModel.getFakeNews(page)?.doOnError{
+            Toast.makeText(activity, getString(R.string.net_problem), Toast.LENGTH_LONG).show()
+        }?.subscribe{
             if (it.results!!.size < 20) {
                 end = true
             }
