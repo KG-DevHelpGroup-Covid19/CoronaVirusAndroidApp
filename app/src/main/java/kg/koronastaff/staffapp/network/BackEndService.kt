@@ -23,13 +23,13 @@ interface BackEndService {
     fun getStat(): Observable<ApiResponse<ArrayList<Stat>>>
 
     @GET("api/location/city")
-    fun getCities(@Query("limit") limit: Int = 200): Observable<ApiResponse<ArrayList<City>>>?
+    fun getCities(@Query("limit") limit: Int = 500): Observable<ApiResponse<ArrayList<City>>>?
 
     @GET("api/location/region")
     fun getRegions(): Observable<ApiResponse<ArrayList<Region>>>?
 
-    @GET("api/test")
-    fun getTests(): Observable<ApiResponse<ArrayList<String>>>?
+    @GET("api/polls/")
+    fun getTests(): Observable<ApiResponse<ArrayList<TestQuestion>>>
 
     @POST("api/test")
     fun sendTestResults(@Body results: TestResults): Observable<ApiResponse<ApiStatus>>
@@ -40,4 +40,5 @@ interface BackEndService {
 
     @GET("api/polls/current_user/")
     fun getUniqueToken(): Observable<Token>
+
 }

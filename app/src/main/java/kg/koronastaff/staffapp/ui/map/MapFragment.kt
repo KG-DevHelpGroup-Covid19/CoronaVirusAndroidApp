@@ -14,6 +14,7 @@ import kg.koronastaff.staffapp.R
 import kg.koronastaff.staffapp.adapters.MapsAdapter
 import kg.koronastaff.staffapp.database.Cache
 import kg.koronastaff.staffapp.models.City
+import kg.koronastaff.staffapp.models.TestResults
 import kg.koronastaff.staffapp.ui.CoronaViewModel
 import kg.koronastaff.staffapp.ui.FragmentWithStat
 import kotlinx.android.synthetic.main.fragment_map.*
@@ -53,10 +54,12 @@ class MapFragment : FragmentWithStat() {
 
         updateSpinner(cities)
 
-        viewModel.getCities()?.subscribe{
-            updateSpinner(it.results)
-            appCache.saveCities(it.results)
-            cities = it.results
+        if (cities.size < 1){
+            viewModel.getCities()?.subscribe{
+                updateSpinner(it.results)
+                appCache.saveCities(it.results)
+                cities = it.results
+            }
         }
 
         viewModel.getStationsByCity(selectId)?.subscribe{

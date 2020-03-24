@@ -26,10 +26,12 @@ class FAQFragment : FragmentWithStat() {
         super.onCreateView(inflater, container, savedInstanceState)
 
         val root = inflater.inflate(R.layout.fragment_faq, container, false)
-        viewManager = LinearLayoutManager(context)
+        viewManager = object: LinearLayoutManager(context){
+            override fun canScrollVertically(): Boolean {
+                return false
+            }
+        }
         mAdapter = FAQAdapter(super.cache.getFaq())
-
-
 
         recyclerView = root.findViewById<RecyclerView>(R.id.faq_news_recycler).apply {
             setHasFixedSize(true)
