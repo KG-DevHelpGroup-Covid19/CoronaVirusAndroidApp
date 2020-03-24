@@ -7,10 +7,11 @@
     android:background="@color/grey_background"
     tools:context=".ui.contacts.ContactsFragment">
     <include layout="@layout/stat_item"/>
+
     <RelativeLayout
         android:layout_marginTop="65dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <TextView
             android:layout_width="match_parent"
@@ -37,5 +38,4 @@
 
 
     </RelativeLayout>
-
 </FrameLayout>
