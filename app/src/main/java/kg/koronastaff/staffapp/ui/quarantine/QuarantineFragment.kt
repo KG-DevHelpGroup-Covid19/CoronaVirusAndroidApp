@@ -15,7 +15,7 @@ import java.util.*
 
 class QuarantineFragment : FragmentWithStat() {
     private var recyclerView: RecyclerView? = null
-    private var mAdapter: RecyclerView.Adapter<*>? = null
+    private var mAdapter: QuarantineAdapter? = null
     private var viewManager: RecyclerView.LayoutManager? = null
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -31,6 +31,14 @@ class QuarantineFragment : FragmentWithStat() {
             layoutManager = viewManager
             adapter = mAdapter
         }
+
+        super.coronaViewModel.getQuarantineSteps()?.subscribe{
+            if (it.results!!.size < 1){
+                it.results = arrayListOf(QuarantineSteps(0, getString(R.string.quarantine_title), getString(R.string.quarantine_body)))
+            }
+            mAdapter!!.update(it.results!!)
+        }
+
         return root
     }
 

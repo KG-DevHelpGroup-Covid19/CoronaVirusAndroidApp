@@ -23,7 +23,7 @@ import java.util.*
 class NewsFragment : FragmentWithStat() {
     private var recyclerView: RecyclerView? = null
     private lateinit var mAdapter: NewsAdapter
-    private var viewManager: RecyclerView.LayoutManager? = null
+    private var viewManager: LinearLayoutManager? = null
     private var page: Int = 1
     private var end = false
 
@@ -33,8 +33,12 @@ class NewsFragment : FragmentWithStat() {
 
         super.onCreateView(inflater, container, savedInstanceState)
         val rootView = inflater.inflate(R.layout.fragment_news, container, false)
-        viewManager = LinearLayoutManager(context)
-
+        viewManager = object: LinearLayoutManager(context){
+            override fun canScrollVertically(): Boolean {
+                return false
+            }
+        }
+        rootView.nested_scroll.scrollX = 0
         mAdapter = NewsAdapter(ArrayList(), activity!!)
         recyclerView = rootView.findViewById<RecyclerView>(R.id.news_list_recycler).apply {
             setHasFixedSize(true)
@@ -68,6 +72,7 @@ class NewsFragment : FragmentWithStat() {
                 end = true
             }
             mAdapter.update(it.results!!)
+            rootView.nested_scroll.scrollX = 0
             cache.saveNews(it.results!!)
         }
 
@@ -78,6 +83,8 @@ class NewsFragment : FragmentWithStat() {
         super.onActivityCreated(savedInstanceState)
         super.updateStats(cache.getStat())
         mAdapter.update(cache.getNews())
+        nested_scroll.scrollX = 0
         val b = Base(activity!!)
     }
 }
+

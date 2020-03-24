@@ -1,6 +1,13 @@
 package kg.koronastaff.staffapp.models
 
 data class TestQuestion(
-        var question: String,
-        var additional: String
-)
+        var id: Int,
+        var title: String,
+        var description: String,
+        var choices: ArrayList<Choice>
+){
+    data class Choice(
+            var id: Int,
+            var sc_value: String
+    )
+}

@@ -20,11 +20,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/head_dead"
+            android:layout_marginTop="10dp"
+            android:textSize="16sp"
             android:layout_marginLeft="10dp"
             android:layout_marginStart="10dp" />
 
         <Spinner
             android:id="@+id/spinner"
+            android:visibility="gone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:entries="@array/head_lang" />
@@ -35,6 +38,7 @@
             android:layout_weight="1"/>
         <ImageView
             android:id="@+id/toggle"
+            android:padding="10dp"
             app:srcCompat="@drawable/ic_hamburger"
             tools:ignore="MissingPrefix,VectorDrawableCompat"
             android:layout_width="wrap_content"

@@ -77,6 +77,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/test_profile_age"
+                    android:textColor="@color/black"
                     android:background="@color/white"
                     android:lineSpacingMultiplier="1.5"
                     android:layout_marginLeft="15dp"

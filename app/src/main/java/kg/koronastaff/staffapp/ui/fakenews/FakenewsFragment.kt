@@ -11,6 +11,7 @@ import kg.koronastaff.staffapp.R
 import kg.koronastaff.staffapp.adapters.NewsAdapter
 import kg.koronastaff.staffapp.helpers.Const
 import kg.koronastaff.staffapp.ui.FragmentWithStat
+import kotlinx.android.synthetic.main.fragment_fakenews.view.*
 import kotlinx.android.synthetic.main.fragment_news.*
 import kotlinx.android.synthetic.main.fragment_news.view.nested_scroll
 
@@ -39,15 +40,15 @@ class FakenewsFragment : FragmentWithStat() {
 
         root.nested_scroll.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener {
             v, _, scrollY, _, _ ->
-            if (scrollY == (v.getChildAt(0).measuredHeight - v.measuredHeight) - 10) {
+            if (scrollY == (v.getChildAt(0).measuredHeight - v.measuredHeight)) {
                 if (!end) {
-                    progressBar.visibility = View.VISIBLE
+                    root.progressBar.visibility = View.VISIBLE
                     coronaViewModel.getNews(page++)?.subscribe {
                         mAdapter.add(it.results!!)
                         if (it.results!!.size < Const.perPage) {
                             end = true
                         }
-                        progressBar.visibility = View.GONE
+                        root.progressBar.visibility = View.GONE
                         Thread {
                             cache.addNews(it.results!!)
                         }
@@ -55,14 +56,14 @@ class FakenewsFragment : FragmentWithStat() {
                 }
             }
         })
-
+        root.progressBar.visibility = View.VISIBLE
         super.coronaViewModel.getFakeNews(page)?.subscribe{
             if (it.results!!.size < 20) {
                 end = true
             }
             mAdapter.update(it.results!!)
+            root.progressBar.visibility = View.GONE
         }
-
         return root
     }
 

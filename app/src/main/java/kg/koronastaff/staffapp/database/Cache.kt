@@ -5,10 +5,7 @@ import android.content.Context
 import android.content.Context.MODE_PRIVATE
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import kg.koronastaff.staffapp.models.City
-import kg.koronastaff.staffapp.models.FAQ
-import kg.koronastaff.staffapp.models.News
-import kg.koronastaff.staffapp.models.Stat
+import kg.koronastaff.staffapp.models.*
 import java.lang.reflect.Type
 
 
@@ -31,7 +28,7 @@ class Cache(var context: Context) {
         val myPrefs = context.getSharedPreferences(prefsNode, MODE_PRIVATE)
         val listJson = myPrefs.getString(selectedCityNode, "")
         if (listJson == ""){
-            return City("0", 0)
+            return City("0", 0, City.CityRegion("",1))
         }
         return gson.fromJson(listJson, City::class.java)
     }

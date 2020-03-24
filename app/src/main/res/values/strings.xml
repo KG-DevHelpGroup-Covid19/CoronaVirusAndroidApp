@@ -18,6 +18,11 @@
         <item>RU</item>
     </string-array>
 
+    <string-array name="gender">
+        <item>Мужской</item>
+        <item>Женский</item>
+    </string-array>
+
     //заражены
     <string name="status_kg_info">Данные по Кыргызстану в режиме онлайн</string>
     <string name="status_infected">Заражены:</string>
@@ -129,4 +134,6 @@
     <string name="net_problem">Проблемы с связью попробуйте обновить страницу</string>
     <string name="back">назад</string>
     <string name="stations_not_found_text">Мы не нашли пукты по указанному городу</string>
+    <string name="quarantine_body">Равным образом укрепление и развитие структуры позволяет оценить значение модели развития. С другой стороны дальнейшее развитие различных форм деятельности обеспечивает широкому кругу (специалистов) участие в формировании систем массового участия.</string>
+    <string name="quarantine_title">Шаг 1</string>
 </resources>
