@@ -36,6 +36,5 @@
             <include layout="@layout/conatcs_detail"/>
         </androidx.cardview.widget.CardView>
 
-
     </RelativeLayout>
 </FrameLayout>
