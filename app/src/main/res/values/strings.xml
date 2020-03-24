@@ -153,4 +153,7 @@ info@mineconom.gov.kg, \n
     <string name="stations_not_found_text">Мы не нашли пукты по указанному городу</string>
     <string name="quarantine_body">Равным образом укрепление и развитие структуры позволяет оценить значение модели развития. С другой стороны дальнейшее развитие различных форм деятельности обеспечивает широкому кругу (специалистов) участие в формировании систем массового участия.</string>
     <string name="quarantine_title">Шаг 1</string>
+    <string name="toast_results_send">результаты отправлены</string>
+    <string name="toast_error">ошибка</string>
+    <string name="toast_test_ok">ответ принят</string>
 </resources>

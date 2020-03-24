@@ -109,7 +109,6 @@ class TestsFragment : Fragment() {
         }
 
         updateToken()
-
     }
 
     private fun updateQuestions(list: ArrayList<TestQuestion>){
@@ -153,9 +152,9 @@ class TestsFragment : Fragment() {
                 testResults.age = Integer.parseInt(age)
                 testResults.district = "a"
                 mViewModel!!.postTestResult(testResults, base.getToken()!!)?.subscribe({
-                    Toast.makeText(activity, "результаты отправлены", Toast.LENGTH_LONG).show()
+                    Toast.makeText(activity, getString(R.string.toast_results_send), Toast.LENGTH_LONG).show()
                     send(v)}, {
-                    Toast.makeText(activity, "ошибка", Toast.LENGTH_LONG).show()
+                    Toast.makeText(activity, getString(R.string.toast_error), Toast.LENGTH_LONG).show()
                     it.printStackTrace()
                 })
         }else{
@@ -165,7 +164,7 @@ class TestsFragment : Fragment() {
                     choice.id
             )
             mViewModel!!.postPollChoice(res)?.subscribe({
-                Toast.makeText(activity, "ответ принят", Toast.LENGTH_LONG).show()
+                Toast.makeText(activity, getString(R.string.toast_test_ok), Toast.LENGTH_LONG).show()
             }, {
                 base.addPollChoice(res)
                 it.printStackTrace()
