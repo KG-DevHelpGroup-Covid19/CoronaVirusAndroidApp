@@ -156,4 +156,5 @@ info@mineconom.gov.kg, \n
     <string name="toast_results_send">результаты отправлены</string>
     <string name="toast_error">ошибка</string>
     <string name="toast_test_ok">ответ принят</string>
+    <string name="choose_city">Выберите город</string>
 </resources>

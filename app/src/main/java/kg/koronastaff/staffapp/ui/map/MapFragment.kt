@@ -1,6 +1,10 @@
 package kg.koronastaff.staffapp.ui.map
 
+import android.annotation.SuppressLint
+import android.app.AlertDialog
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -11,7 +15,9 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import io.reactivex.Observable
 import kg.koronastaff.staffapp.R
+import kg.koronastaff.staffapp.adapters.CityListAdapter
 import kg.koronastaff.staffapp.adapters.MapsAdapter
 import kg.koronastaff.staffapp.database.Cache
 import kg.koronastaff.staffapp.models.City
@@ -19,24 +25,30 @@ import kg.koronastaff.staffapp.models.TestResults
 import kg.koronastaff.staffapp.ui.CoronaViewModel
 import kg.koronastaff.staffapp.ui.FragmentWithStat
 import kotlinx.android.synthetic.main.fragment_map.*
+import kotlinx.android.synthetic.main.fragment_map.view.*
+import kotlinx.android.synthetic.main.item_city_list.view.*
 
 
-class MapFragment : FragmentWithStat() {
+class MapFragment : FragmentWithStat(), ImplCityView {
 
     private var recyclerView: RecyclerView? = null
     private lateinit var mAdapter: MapsAdapter
+    private lateinit var mCityAdapter: CityListAdapter
     private var viewManager: RecyclerView.LayoutManager? = null
     private lateinit var cities: ArrayList<City>
+    private lateinit var result: ArrayList<City>
     private lateinit var viewModel: CoronaViewModel
     lateinit var appCache: Cache
     private var selectId: Int = 0
+    private lateinit var rootView: View
+    private lateinit var alertDialog: AlertDialog
 
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?, savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
         viewModel= super.coronaViewModel
         appCache  = super.cache
-        val rootView = inflater.inflate(R.layout.fragment_map, container, false)
+        rootView = inflater.inflate(R.layout.fragment_map, container, false)
         viewManager = LinearLayoutManager(context)
         mAdapter = MapsAdapter(arrayListOf(), activity!!)
         recyclerView = rootView.findViewById<RecyclerView>(R.id.map_recycler_view).apply {
@@ -87,11 +99,14 @@ class MapFragment : FragmentWithStat() {
                     mAdapter.update(it.results)
                 }
             }
+        }
 
+        rootView.f_m_selected_city.setOnClickListener {
+            dialogListOfCountries(cities)
         }
     }
 
-    fun updateSpinner(list: ArrayList<City>){
+    private fun updateSpinner(list: ArrayList<City>){
         val listNew = arrayListOf<String>()
         val city = cache.getSelectedCity()
         var i = 0
@@ -107,6 +122,54 @@ class MapFragment : FragmentWithStat() {
         cities_spinner.setSelection(selectId)
     }
 
+    private fun dialogListOfCountries(dataList: ArrayList<City>) {
+        val dialogView = View.inflate(context, R.layout.item_city_list, null)
+        val builder = AlertDialog.Builder(context)
+        builder.setCancelable(true)
+        builder.setView(dialogView)
+        alertDialog = builder.create()
+        alertDialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
+        alertDialog.show()
+//        dialogView.dialog_spinner_view_clear.setOnClickListener {
+//            dialogView.dialog_spinner_view_serch.setText("")
+//        }
+        dialogView.i_c_l_search_et.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(p0: Editable?) {
+            }
 
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                result = Observable.fromIterable(dataList).filter { t ->
+                    t.name.contains(dialogView.i_c_l_search_et.text.toString())
+                }.toList().blockingGet() as ArrayList<City>
+                mCityAdapter.setList(result)
+                mCityAdapter.notifyDataSetChanged()
+            }
+        })
+        val recyclerView = dialogView.findViewById<RecyclerView>(R.id.i_c_l_cities)
+        recyclerView.setHasFixedSize(true)
+        val mLayoutManager = LinearLayoutManager(context)
+        recyclerView.layoutManager = mLayoutManager
+        mCityAdapter = CityListAdapter(dataList, this)
+        recyclerView.adapter = mCityAdapter
+        recyclerView.isNestedScrollingEnabled = false
+    }
 
+    override fun selectedCity(name: String, position: Int) {
+        alertDialog.dismiss()
+        rootView.f_m_selected_city.text = name
+        val city = cities[position]
+        cache.saveSelectedCity(city)
+        viewModel.getStationsByCity(city.pk)?.doOnError{
+            Toast.makeText(activity, getString(R.string.net_problem), Toast.LENGTH_LONG).show()
+        }?.subscribe{
+            if(it.results.size > 0){
+                not_found_text.visibility = View.GONE
+            }else{
+                not_found_text.visibility = View.VISIBLE
+            }
+            mAdapter.update(it.results)
+        }
+    }
 }
