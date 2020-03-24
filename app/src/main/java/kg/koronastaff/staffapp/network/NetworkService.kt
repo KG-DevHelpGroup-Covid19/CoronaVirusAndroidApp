@@ -6,6 +6,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class NetworkService {
     fun create(): BackEndService {
+
         val retrofit = Retrofit.Builder()
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
@@ -13,5 +14,6 @@ class NetworkService {
                 .build()
 
         return retrofit.create(BackEndService::class.java)
+
     }
 }
