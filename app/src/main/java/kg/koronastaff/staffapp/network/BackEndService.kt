@@ -11,7 +11,10 @@ interface BackEndService {
     fun getTips(): Observable<ApiResponse<ArrayList<Tips>?>>?
 
     @GET("api/news")
-    fun getNews(@Query("offset") page: Int, @Query("limit") limit: Int = 20, @Query("fake") fake: Boolean = false): Observable<ApiResponse<ArrayList<News>?>>?
+    fun getNews(@Query("offset") page: Int,
+                @Query("limit") limit: Int = 20,
+                @Query("fake") fake: Boolean = false):
+            Observable<ApiResponse<ArrayList<News>?>>?
 
     @GET("api/faq")
     fun getFAQ(): Observable<ApiResponse<ArrayList<FAQ>?>>?
@@ -23,7 +26,8 @@ interface BackEndService {
     fun getStat(): Observable<ApiResponse<ArrayList<Stat>>>
 
     @GET("api/location/city")
-    fun getCities(@Query("limit") limit: Int = 500): Observable<ApiResponse<ArrayList<City>>>?
+    fun getCities(@Query("limit") limit: Int = 500):
+            Observable<ApiResponse<ArrayList<City>>>?
 
     @GET("api/location/region")
     fun getRegions(): Observable<ApiResponse<ArrayList<Region>>>?
@@ -42,5 +46,6 @@ interface BackEndService {
     fun postPollChoice(@Body p: PollChoice): Observable<PollChoice>
 
     @PUT("api/polls/current_user/{unique_id}/")
-    fun putUserData(@Body res: TestResults, @Path("unique_id") token: String): Observable<TestResults>
+    fun putUserData(@Body res: TestResults, @Path("unique_id") token: String):
+            Observable<TestResults>
 }
