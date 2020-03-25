@@ -36,7 +36,6 @@ class Cache(var context: Context) {
         return gson.fromJson(listJson, listType)
     }
 
-
     fun saveSelectedCity(city: City){
         val myPrefs = context.getSharedPreferences(prefsNode, MODE_PRIVATE).edit()
         myPrefs.putString(selectedCityNode, gson.toJson(city))

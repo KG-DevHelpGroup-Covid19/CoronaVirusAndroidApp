@@ -5,6 +5,7 @@ import android.app.Activity
 import android.content.Context
 import android.os.Build
 import android.os.Bundle
+import android.text.Editable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -62,12 +63,20 @@ class TestsFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
         mViewModel = ViewModelProvider(this).get(TestsViewModel::class.java)
         cities = cache.getCities()
+        updateQuestions(cache.getQuestions())
 
-        mViewModel!!.getQuestions()?.subscribe{
+
+
+        mViewModel!!.getQuestions()?.doOnError {
+            updateQuestion(root)
+            root.progressBar2.visibility = View.GONE
+        }?.subscribe{
             updateQuestions(it.results)
             updateQuestion(root)
+            cache.saveQuestions(it.results)
             root.progressBar2.visibility = View.GONE
         }
 
@@ -109,6 +118,17 @@ class TestsFragment : Fragment() {
         }
 
         updateToken()
+
+    }
+
+    private fun restoreResultsFromMemoryIfExist(){
+        val results = base.getResults()
+
+        if (results != null){
+            test_name.setText(results.first_name)
+            test_surname.setText(results.last_name)
+            test_age.setText(testResults.age)
+        }
     }
 
     private fun updateQuestions(list: ArrayList<TestQuestion>){
@@ -154,8 +174,8 @@ class TestsFragment : Fragment() {
                 mViewModel!!.postTestResult(testResults, base.getToken()!!)?.subscribe({
                     Toast.makeText(activity, getString(R.string.toast_results_send), Toast.LENGTH_LONG).show()
                     send(v)}, {
-                    Toast.makeText(activity, getString(R.string.toast_error), Toast.LENGTH_LONG).show()
-                    it.printStackTrace()
+                    Toast.makeText(activity,  getString(R.string.toast_error), Toast.LENGTH_LONG).show()
+                    base.saveResults(testResults)
                 })
         }else{
             val res = PollChoice(

@@ -8,6 +8,7 @@ import com.google.gson.reflect.TypeToken
 import kg.koronastaff.staffapp.models.City
 import kg.koronastaff.staffapp.models.PollChoice
 import kg.koronastaff.staffapp.models.TestQuestion
+import kg.koronastaff.staffapp.models.TestResults
 import java.lang.reflect.Type
 
 
@@ -49,6 +50,23 @@ class Base(var context: Context) {
         val l  = getChoices()
         l.add(choice)
         saveChoices(l)
+    }
+
+    @SuppressLint("CommitPrefEdits")
+    fun saveResults(list: TestResults){
+        val myPrefs = context.getSharedPreferences(prefsNode, MODE_PRIVATE).edit()
+        myPrefs.putString(pollChoiceNode, gson.toJson(list))
+        myPrefs.apply()
+    }
+
+    fun getResults(): TestResults?{
+        val myPrefs = context.getSharedPreferences(prefsNode, MODE_PRIVATE)
+        val listType: Type = object : TypeToken<TestResults>() {}.type
+        val listJson = myPrefs.getString(pollChoiceNode, "")
+        if (listJson == ""){
+            return null
+        }
+        return gson.fromJson(listJson, listType)
     }
 
 }

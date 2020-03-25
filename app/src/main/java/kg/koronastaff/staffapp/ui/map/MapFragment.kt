@@ -1,6 +1,5 @@
 package kg.koronastaff.staffapp.ui.map
 
-import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.os.Bundle
 import android.text.Editable
@@ -21,7 +20,6 @@ import kg.koronastaff.staffapp.adapters.CityListAdapter
 import kg.koronastaff.staffapp.adapters.MapsAdapter
 import kg.koronastaff.staffapp.database.Cache
 import kg.koronastaff.staffapp.models.City
-import kg.koronastaff.staffapp.models.TestResults
 import kg.koronastaff.staffapp.ui.CoronaViewModel
 import kg.koronastaff.staffapp.ui.FragmentWithStat
 import kotlinx.android.synthetic.main.fragment_map.*

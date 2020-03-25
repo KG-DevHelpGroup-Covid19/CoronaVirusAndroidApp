@@ -60,9 +60,6 @@ class NewsFragment : FragmentWithStat() {
                             end = true
                         }
                         progressBar.visibility = View.GONE
-                        Thread {
-                            cache.addNews(it.results!!)
-                        }
                     }
                 }
             }
@@ -89,7 +86,6 @@ class NewsFragment : FragmentWithStat() {
         super.updateStats(cache.getStat())
         mAdapter.update(cache.getNews())
         nested_scroll.scrollX = 0
-        val b = Base(activity!!)
     }
 }
 
