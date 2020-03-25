@@ -18,7 +18,7 @@ class Welcome : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_welcome)
         Thread(Runnable {
-
+            Thread.sleep(400)
             // run permission checking
             if (ContextCompat.checkSelfPermission(activity,
                             Manifest.permission.INTERNET)

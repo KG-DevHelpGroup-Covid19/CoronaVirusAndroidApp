@@ -149,7 +149,7 @@ class MapFragment : FragmentWithStat(), ImplCityView {
         recyclerView.setHasFixedSize(true)
         val mLayoutManager = LinearLayoutManager(context)
         recyclerView.layoutManager = mLayoutManager
-        mCityAdapter = CityListAdapter(dataList, this)
+        mCityAdapter = CityListAdapter(dataList, this, null, R.layout.fragment_map)
         recyclerView.adapter = mCityAdapter
         recyclerView.isNestedScrollingEnabled = false
     }

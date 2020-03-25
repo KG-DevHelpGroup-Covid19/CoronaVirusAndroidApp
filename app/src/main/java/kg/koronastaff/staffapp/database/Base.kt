@@ -17,6 +17,7 @@ class Base(var context: Context) {
     private val tokenNode = "token"
     private val prefsNode = "base"
     private val pollChoiceNode = "pollchoice"
+    private val resultsNode = "results"
 
     fun saveToken(token: String){
         val myPrefs = context.getSharedPreferences(prefsNode, MODE_PRIVATE).edit()
@@ -55,14 +56,14 @@ class Base(var context: Context) {
     @SuppressLint("CommitPrefEdits")
     fun saveResults(list: TestResults){
         val myPrefs = context.getSharedPreferences(prefsNode, MODE_PRIVATE).edit()
-        myPrefs.putString(pollChoiceNode, gson.toJson(list))
+        myPrefs.putString(resultsNode, gson.toJson(list))
         myPrefs.apply()
     }
 
-    fun getResults(): TestResults?{
+    fun getResults(): TestResults? {
         val myPrefs = context.getSharedPreferences(prefsNode, MODE_PRIVATE)
         val listType: Type = object : TypeToken<TestResults>() {}.type
-        val listJson = myPrefs.getString(pollChoiceNode, "")
+        val listJson = myPrefs.getString(resultsNode, "")
         if (listJson == ""){
             return null
         }

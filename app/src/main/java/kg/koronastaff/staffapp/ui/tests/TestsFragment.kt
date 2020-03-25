@@ -2,10 +2,12 @@ package kg.koronastaff.staffapp.ui.tests
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.Context
 import android.os.Build
 import android.os.Bundle
 import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,7 +18,11 @@ import androidx.core.view.marginTop
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import io.reactivex.Observable
 import kg.koronastaff.staffapp.R
+import kg.koronastaff.staffapp.adapters.CityListAdapter
 import kg.koronastaff.staffapp.database.Base
 import kg.koronastaff.staffapp.database.Cache
 import kg.koronastaff.staffapp.models.City
@@ -26,25 +32,32 @@ import kg.koronastaff.staffapp.models.TestResults
 import kotlinx.android.synthetic.main.fragment_map.*
 import kotlinx.android.synthetic.main.fragment_tests.*
 import kotlinx.android.synthetic.main.fragment_tests.view.*
+import kotlinx.android.synthetic.main.item_city_list.view.*
 import kotlin.collections.ArrayList
 
-class TestsFragment : Fragment() {
+class TestsFragment : Fragment(), ImplTestFragmentView {
     private var questionCount = 0
     private var mViewModel: TestsViewModel? = null
     private var sendEnabled = false
     private lateinit var base: Base
     private lateinit var token: String
     private lateinit var cities: ArrayList<City>
+    private lateinit var resultCity: ArrayList<City>
+    private lateinit var resultRegions: ArrayList<String>
     private lateinit var cache: Cache
+    private lateinit var mCityAdapter: CityListAdapter
 
     private var questions: ArrayList<TestQuestion> = arrayListOf()
 
     private lateinit var testRegion: Spinner
     private lateinit var currentCities: ArrayList<City>
+    private lateinit var alertDialog: AlertDialog
 
-    private var testResults: TestResults = TestResults("", "","","", "", 1, 0)
+    private var testResults: TestResults = TestResults("", "", "", "", "", 1, 0)
 
     private lateinit var root: View
+    private var parsedRegionsPosition = -1
+    private val LAYOUT_REGIONS = 10001
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -57,7 +70,7 @@ class TestsFragment : Fragment() {
         root.back_button.setOnClickListener {
             activity!!.onBackPressed()
         }
-
+        restoreResultsFromMemoryIfExist()
         return root
     }
 
@@ -119,15 +132,27 @@ class TestsFragment : Fragment() {
 
         updateToken()
 
+        root.test_region_txt.setOnClickListener {
+            dialogRegionList(mViewModel!!.parsedRegions)
+        }
+
+        root.test_district_txt.setOnClickListener {
+            if (parsedRegionsPosition != -1)
+                mViewModel!!.parsedCities[mViewModel!!.parsedRegions[parsedRegionsPosition]]?.let { it1 -> dialogCityList(it1) }
+            else
+                Toast.makeText(context, "С начало выберите область", Toast.LENGTH_LONG).show()
+
+        }
     }
 
+    @SuppressLint("SetTextI18n")
     private fun restoreResultsFromMemoryIfExist(){
         val results = base.getResults()
 
         if (results != null){
-            test_name.setText(results.first_name)
-            test_surname.setText(results.last_name)
-            test_age.setText(testResults.age)
+            root.test_name.setText(results.first_name)
+            root.test_surname.setText(results.last_name)
+            root.test_age.setText(results.age.toString())
         }
     }
 
@@ -173,6 +198,7 @@ class TestsFragment : Fragment() {
                 testResults.district = "a"
                 mViewModel!!.postTestResult(testResults, base.getToken()!!)?.subscribe({
                     Toast.makeText(activity, getString(R.string.toast_results_send), Toast.LENGTH_LONG).show()
+                    base.saveResults(testResults)
                     send(v)}, {
                     Toast.makeText(activity,  getString(R.string.toast_error), Toast.LENGTH_LONG).show()
                     base.saveResults(testResults)
@@ -263,5 +289,82 @@ class TestsFragment : Fragment() {
             imm.hideSoftInputFromWindow(view.windowToken, 0)
 
         }
+    }
+
+    private fun dialogRegionList(dataList: ArrayList<String>) {
+        val dialogView = View.inflate(context, R.layout.item_city_list, null)
+        val builder = AlertDialog.Builder(context)
+        builder.setCancelable(true)
+        builder.setView(dialogView)
+        alertDialog = builder.create()
+        alertDialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
+        alertDialog.show()
+        dialogView.i_c_l_search_et.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(p0: Editable?) {
+            }
+
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                resultRegions = Observable.fromIterable(dataList).filter { t ->
+                    t.contains(dialogView.i_c_l_search_et.text.toString())
+                }.toList().blockingGet() as ArrayList<String>
+                mCityAdapter.setList(resultRegions)
+                mCityAdapter.notifyDataSetChanged()
+            }
+        })
+        val recyclerView = dialogView.findViewById<RecyclerView>(R.id.i_c_l_cities)
+        recyclerView.setHasFixedSize(true)
+        val mLayoutManager = LinearLayoutManager(context)
+        recyclerView.layoutManager = mLayoutManager
+        mCityAdapter = CityListAdapter(dataList, null, this, LAYOUT_REGIONS)
+        recyclerView.adapter = mCityAdapter
+        recyclerView.isNestedScrollingEnabled = false
+    }
+
+    private fun dialogCityList(dataList: ArrayList<City>) {
+        val dialogView = View.inflate(context, R.layout.item_city_list, null)
+        val builder = AlertDialog.Builder(context)
+        builder.setCancelable(true)
+        builder.setView(dialogView)
+        alertDialog = builder.create()
+        alertDialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
+        alertDialog.show()
+        dialogView.i_c_l_search_et.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(p0: Editable?) {
+            }
+
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                resultCity = Observable.fromIterable(dataList).filter { t ->
+                    t.name.contains(dialogView.i_c_l_search_et.text.toString())
+                }.toList().blockingGet() as ArrayList<City>
+                mCityAdapter.setList(resultCity)
+                mCityAdapter.notifyDataSetChanged()
+            }
+        })
+        val recyclerView = dialogView.findViewById<RecyclerView>(R.id.i_c_l_cities)
+        recyclerView.setHasFixedSize(true)
+        val mLayoutManager = LinearLayoutManager(context)
+        recyclerView.layoutManager = mLayoutManager
+        mCityAdapter = CityListAdapter(dataList, null, this, 0)
+        recyclerView.adapter = mCityAdapter
+        recyclerView.isNestedScrollingEnabled = false
+    }
+
+    override fun selectedRegion(name: String, position: Int) {
+        parsedRegionsPosition = position
+        root.test_region_txt.text = name
+        testResults.region = name
+        alertDialog.dismiss()
+    }
+
+    override fun selectedCity(name: String, position: Int) {
+        root.test_district_txt.text = name
+        testResults.city = name
+        alertDialog.dismiss()
     }
 }
