@@ -53,6 +53,12 @@ class Base(var context: Context) {
         saveChoices(l)
     }
 
+    fun removePollChoice(choice: PollChoice){
+        val l  = getChoices()
+        l.remove(choice)
+        saveChoices(l)
+    }
+
     @SuppressLint("CommitPrefEdits")
     fun saveResults(list: TestResults){
         val myPrefs = context.getSharedPreferences(prefsNode, MODE_PRIVATE).edit()

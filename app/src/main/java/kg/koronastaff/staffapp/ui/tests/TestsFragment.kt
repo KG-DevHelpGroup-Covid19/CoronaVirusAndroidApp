@@ -140,8 +140,7 @@ class TestsFragment : Fragment(), ImplTestFragmentView {
             if (parsedRegionsPosition != -1)
                 mViewModel!!.parsedCities[mViewModel!!.parsedRegions[parsedRegionsPosition]]?.let { it1 -> dialogCityList(it1) }
             else
-                Toast.makeText(context, "С начало выберите область", Toast.LENGTH_LONG).show()
-
+                Toast.makeText(context, getString(R.string.choose_region), Toast.LENGTH_LONG).show()
         }
     }
 
