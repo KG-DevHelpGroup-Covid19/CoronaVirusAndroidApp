@@ -49,7 +49,6 @@ class TestsViewModel : ViewModel() {
         }
         val keys = parsedCities.filterValues { true }.keys
         parsedRegions.addAll(keys)
-        println(keys)
     }
 
     fun getQuestions(): Observable<ApiResponse<ArrayList<TestQuestion>>>? {

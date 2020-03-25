@@ -11,6 +11,7 @@ import kg.koronastaff.staffapp.R
 import kg.koronastaff.staffapp.adapters.QuarantineAdapter
 import kg.koronastaff.staffapp.models.QuarantineSteps
 import kg.koronastaff.staffapp.ui.FragmentWithStat
+import kotlinx.android.synthetic.main.fragment_quarantine.*
 import java.util.*
 
 class QuarantineFragment : FragmentWithStat() {
@@ -24,7 +25,7 @@ class QuarantineFragment : FragmentWithStat() {
         recyclerView = root.findViewById(R.id.fake_news_recycler)
         viewManager = LinearLayoutManager(context)
 
-        mAdapter = QuarantineAdapter(arrayListOf(QuarantineSteps(0, getString(R.string.quarantine_title), getString(R.string.quarantine_body))))
+        mAdapter = QuarantineAdapter(arrayListOf())
 
         recyclerView = root.findViewById<RecyclerView>(R.id.fake_news_recycler).apply {
             setHasFixedSize(true)
@@ -34,8 +35,9 @@ class QuarantineFragment : FragmentWithStat() {
 
         super.coronaViewModel.getQuarantineSteps()?.subscribe{
             if (it.results!!.size < 1){
-                it.results = arrayListOf(QuarantineSteps(0, getString(R.string.quarantine_title), getString(R.string.quarantine_body)))
+                it.results = arrayListOf()
             }
+            textView6.visibility = View.GONE
             mAdapter!!.update(it.results!!)
         }
 

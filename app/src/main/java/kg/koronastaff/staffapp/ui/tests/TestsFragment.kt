@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.Context
+import android.content.DialogInterface
 import android.os.Build
 import android.os.Bundle
 import android.text.Editable
@@ -70,6 +71,7 @@ class TestsFragment : Fragment(), ImplTestFragmentView {
         root.back_button.setOnClickListener {
             activity!!.onBackPressed()
         }
+
         restoreResultsFromMemoryIfExist()
         return root
     }
@@ -225,7 +227,6 @@ class TestsFragment : Fragment(), ImplTestFragmentView {
         createButtons(q.choices, v)
         if(q.isLast){loadTestingAnswer(v)}
         counterUpdate(v)
-        println(questions)
         questionCount++
     }
 
@@ -256,6 +257,22 @@ class TestsFragment : Fragment(), ImplTestFragmentView {
                         it.printStackTrace()
                     }
             )
+        } else {
+            AlertDialog.Builder(activity!!)
+                    .setTitle("Тест")
+                    .setMessage("Вы хотите пройти тест еще раз?")
+                    .setPositiveButton("Да") { _: DialogInterface, _: Int ->
+                        mViewModel!!.getToken().subscribe(
+                                {
+                                    base.saveToken(it.unique_id)
+                                }, {
+                            it.printStackTrace()
+                        }
+                        )
+                    }
+                    .setNegativeButton("нет") { _ : DialogInterface, _: Int ->
+                        activity!!.onBackPressed()
+                    }.show()
         }
     }
 
