@@ -39,6 +39,7 @@ class QuarantineFragment : FragmentWithStat() {
             }
             textView6.visibility = View.GONE
             mAdapter!!.update(it.results!!)
+            cache.saveSteps(it.results!!)
         }
 
         return root
@@ -47,5 +48,6 @@ class QuarantineFragment : FragmentWithStat() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         super.updateStats(cache.getStat())
+        mAdapter?.update(cache.getSteps())
     }
 }

@@ -18,6 +18,9 @@ class Cache(var context: Context) {
     private val newsNoe = "news"
     private val selectedCityNode = "city"
     private val questionsNode = "questions"
+    private val contactsNode = "contacts"
+    private val tipsNode = "tips"
+    private val stepsNode = "steps"
 
     @SuppressLint("CommitPrefEdits")
     fun saveQuestions(list: ArrayList<TestQuestion>){
@@ -25,7 +28,6 @@ class Cache(var context: Context) {
         myPrefs.putString(questionsNode, gson.toJson(list))
         myPrefs.apply()
     }
-
     fun getQuestions(): ArrayList<TestQuestion>{
         val myPrefs = context.getSharedPreferences(prefsNode, MODE_PRIVATE)
         val listType: Type = object : TypeToken<ArrayList<TestQuestion>>() {}.type
@@ -35,6 +37,41 @@ class Cache(var context: Context) {
         }
         return gson.fromJson(listJson, listType)
     }
+
+    fun getTips(): ArrayList<Tips>{
+        val myPrefs = context.getSharedPreferences(prefsNode, MODE_PRIVATE)
+        val listType: Type = object : TypeToken<ArrayList<Tips>>() {}.type
+        val listJson = myPrefs.getString(tipsNode, "")
+        if (listJson == ""){
+            return arrayListOf()
+        }
+        return gson.fromJson(listJson, listType)
+    }
+
+    @SuppressLint("CommitPrefEdits")
+    fun saveTips(list: ArrayList<Tips>){
+        val myPrefs = context.getSharedPreferences(prefsNode, MODE_PRIVATE).edit()
+        myPrefs.putString(tipsNode, gson.toJson(list))
+        myPrefs.apply()
+    }
+
+    fun getSteps(): ArrayList<QuarantineSteps>{
+        val myPrefs = context.getSharedPreferences(prefsNode, MODE_PRIVATE)
+        val listType: Type = object : TypeToken<ArrayList<QuarantineSteps>>() {}.type
+        val listJson = myPrefs.getString(stepsNode, "")
+        if (listJson == ""){
+            return arrayListOf()
+        }
+        return gson.fromJson(listJson, listType)
+    }
+
+    @SuppressLint("CommitPrefEdits")
+    fun saveSteps(list: ArrayList<QuarantineSteps>){
+        val myPrefs = context.getSharedPreferences(prefsNode, MODE_PRIVATE).edit()
+        myPrefs.putString(stepsNode, gson.toJson(list))
+        myPrefs.apply()
+    }
+
 
     fun saveSelectedCity(city: City){
         val myPrefs = context.getSharedPreferences(prefsNode, MODE_PRIVATE).edit()
@@ -97,6 +134,23 @@ class Cache(var context: Context) {
         val myPrefs = context.getSharedPreferences(prefsNode, MODE_PRIVATE)
         val listType: Type = object : TypeToken<ArrayList<News>>() {}.type
         val listJson = myPrefs.getString(newsNoe, "")
+        if (listJson == ""){
+            return arrayListOf()
+        }
+        return gson.fromJson(listJson, listType)
+    }
+
+    @SuppressLint("CommitPrefEdits")
+    fun saveContacts(list: ArrayList<Contacts>){
+        val myPrefs = context.getSharedPreferences(prefsNode, MODE_PRIVATE).edit()
+        myPrefs.putString(contactsNode, gson.toJson(list))
+        myPrefs.apply()
+    }
+
+    fun getContacts(): ArrayList<Contacts>{
+        val myPrefs = context.getSharedPreferences(prefsNode, MODE_PRIVATE)
+        val listType: Type = object : TypeToken<ArrayList<Contacts>>() {}.type
+        val listJson = myPrefs.getString(contactsNode, "")
         if (listJson == ""){
             return arrayListOf()
         }

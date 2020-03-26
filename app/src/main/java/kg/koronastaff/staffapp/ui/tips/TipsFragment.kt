@@ -37,6 +37,7 @@ class TipsFragment : FragmentWithStat() {
 
         super.coronaViewModel.getTips()?.subscribe{
             mAdapter.update(it.results!!)
+            cache.saveTips(it.results!!)
         }
 
         return rootView
@@ -45,7 +46,6 @@ class TipsFragment : FragmentWithStat() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         super.updateStats(cache.getStat())
+        mAdapter.update(cache.getTips())
     }
-
-
 }

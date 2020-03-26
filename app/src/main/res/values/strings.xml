@@ -110,7 +110,7 @@
 
     //----------------------------------------------
     //contact
-    <string name="contact_name">Контакты штаба </string>
+    <string name="contact_name">Контакты</string>
     <string name="current_lang">RU</string>
     <string name="menu_home">домой</string>
     <string name="stat_label">Данные по Кыргызстану в режиме онлайн</string>

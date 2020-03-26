@@ -1,7 +1,8 @@
 package kg.koronastaff.staffapp.ui.map
 
+import kg.koronastaff.staffapp.models.City
 import java.text.FieldPosition
 
 interface ImplCityView {
-    fun selectedCity(name: String, position: Int){}
+    fun selectedCity(city: City){}
 }

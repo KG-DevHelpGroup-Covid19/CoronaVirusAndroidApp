@@ -15,6 +15,7 @@ import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import io.reactivex.Observable
+import io.reactivex.disposables.Disposable
 import kg.koronastaff.staffapp.R
 import kg.koronastaff.staffapp.adapters.CityListAdapter
 import kg.koronastaff.staffapp.adapters.MapsAdapter
@@ -25,6 +26,8 @@ import kg.koronastaff.staffapp.ui.FragmentWithStat
 import kotlinx.android.synthetic.main.fragment_map.*
 import kotlinx.android.synthetic.main.fragment_map.view.*
 import kotlinx.android.synthetic.main.item_city_list.view.*
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class MapFragment : FragmentWithStat(), ImplCityView {
@@ -40,6 +43,8 @@ class MapFragment : FragmentWithStat(), ImplCityView {
     private var selectId: Int = 0
     private lateinit var rootView: View
     private lateinit var alertDialog: AlertDialog
+
+    var d: Disposable? = null
 
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -64,8 +69,9 @@ class MapFragment : FragmentWithStat(), ImplCityView {
         cities = cache.getCities()
         val c: City = cache.getSelectedCity()
         f_m_selected_city.text = c.name
-        viewModel.getStationsByCity(c.pk)?.doOnError{
+        d = viewModel.getStationsByCity(c.pk)?.doOnError{
             Toast.makeText(activity, getString(R.string.net_problem), Toast.LENGTH_LONG).show()
+            d?.dispose()
         }?.subscribe{
             if(it.results.size > 0){
                 not_found_text.visibility = View.GONE
@@ -73,6 +79,7 @@ class MapFragment : FragmentWithStat(), ImplCityView {
                 not_found_text.visibility = View.VISIBLE
             }
             mAdapter.update(it.results)
+            d?.dispose()
         }
 
         updateSpinner(cities)
@@ -92,8 +99,10 @@ class MapFragment : FragmentWithStat(), ImplCityView {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 val city = cities[position]
                 cache.saveSelectedCity(city)
-                viewModel.getStationsByCity(city.pk)?.doOnError{
+                d?.dispose()
+                d = viewModel.getStationsByCity(city.pk)?.doOnError{
                     Toast.makeText(activity, getString(R.string.net_problem), Toast.LENGTH_LONG).show()
+                    d?.dispose()
                 }?.subscribe{
                     if(it.results.size > 0){
                         not_found_text.visibility = View.GONE
@@ -101,6 +110,7 @@ class MapFragment : FragmentWithStat(), ImplCityView {
                         not_found_text.visibility = View.VISIBLE
                     }
                     mAdapter.update(it.results)
+                    d?.dispose()
                 }
             }
         }
@@ -145,7 +155,8 @@ class MapFragment : FragmentWithStat(), ImplCityView {
             }
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 result = Observable.fromIterable(dataList).filter { t ->
-                    t.name.contains(dialogView.i_c_l_search_et.text.toString())
+                    val name =  dialogView.i_c_l_search_et.text.toString()
+                    t.name.contains(name.capitalize())
                 }.toList().blockingGet() as ArrayList<City>
                 mCityAdapter.setList(result)
                 mCityAdapter.notifyDataSetChanged()
@@ -160,10 +171,9 @@ class MapFragment : FragmentWithStat(), ImplCityView {
         recyclerView.isNestedScrollingEnabled = false
     }
 
-    override fun selectedCity(name: String, position: Int) {
+    override fun selectedCity(city: City) {
         alertDialog.dismiss()
-        rootView.f_m_selected_city.text = name
-        val city = cities[position]
+        rootView.f_m_selected_city.text = city.name
         cache.saveSelectedCity(city)
         viewModel.getStationsByCity(city.pk)?.doOnError{
             Toast.makeText(activity, getString(R.string.net_problem), Toast.LENGTH_LONG).show()

@@ -39,6 +39,7 @@ class NewsFragment : FragmentWithStat() {
             }
         }
         rootView.nested_scroll.scrollX = 0
+
         mAdapter = NewsAdapter(ArrayList(), activity!!)
         recyclerView = rootView.findViewById<RecyclerView>(R.id.news_list_recycler).apply {
             setHasFixedSize(true)
@@ -84,7 +85,9 @@ class NewsFragment : FragmentWithStat() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         super.updateStats(cache.getStat())
-        mAdapter.update(cache.getNews())
+        Thread{
+            mAdapter.update(cache.getNews())
+        }.start()
         nested_scroll.scrollX = 0
     }
 }

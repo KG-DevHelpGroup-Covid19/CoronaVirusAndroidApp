@@ -48,4 +48,8 @@ interface BackEndService {
     @PUT("api/polls/current_user/{unique_id}/")
     fun putUserData(@Body res: TestResults, @Path("unique_id") token: String):
             Observable<TestResults>
+
+    @GET("api/location/contact/")
+    fun getContacts():
+            Observable<ApiResponse<ArrayList<Contacts>>>
 }

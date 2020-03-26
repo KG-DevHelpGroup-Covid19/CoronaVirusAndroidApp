@@ -47,4 +47,8 @@ class CoronaViewModel : ViewModel(){
     fun getStationsByCity(id: Int): Observable<ApiResponse<ArrayList<StationMap>>>? {
         return apiServe.getStationsByCityId(id)?.subscribeOn(Schedulers.io())?.observeOn(AndroidSchedulers.mainThread())
     }
+
+    fun getContacts(): Observable<ApiResponse<ArrayList<Contacts>>>? {
+        return apiServe.getContacts().subscribeOn(Schedulers.io())?.observeOn(AndroidSchedulers.mainThread())
+    }
 }

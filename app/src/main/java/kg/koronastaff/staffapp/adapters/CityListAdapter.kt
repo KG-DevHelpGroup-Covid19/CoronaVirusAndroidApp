@@ -46,7 +46,7 @@ class CityListAdapter(private var list: ArrayList<*>,
             holder.frame.i_c_n_title.text = s.name
             holder.itemView.setOnClickListener {
                 if (implCityView != null)
-                    implCityView?.selectedCity(s.name, position)
+                    implCityView?.selectedCity(s)
                 else if (implTestFragmentView != null)
                     implTestFragmentView?.selectedCity(s.name, position)
             }
