@@ -62,6 +62,18 @@ class MapFragment : FragmentWithStat(), ImplCityView {
         super.updateStats(cache.getStat())
 
         cities = cache.getCities()
+        val c: City = cache.getSelectedCity()
+        f_m_selected_city.text = c.name
+        viewModel.getStationsByCity(c.pk)?.doOnError{
+            Toast.makeText(activity, getString(R.string.net_problem), Toast.LENGTH_LONG).show()
+        }?.subscribe{
+            if(it.results.size > 0){
+                not_found_text.visibility = View.GONE
+            }else{
+                not_found_text.visibility = View.VISIBLE
+            }
+            mAdapter.update(it.results)
+        }
 
         updateSpinner(cities)
 
@@ -73,12 +85,6 @@ class MapFragment : FragmentWithStat(), ImplCityView {
             }
         }
 
-        viewModel.getStationsByCity(selectId)?.doOnError{
-            Toast.makeText(activity, getString(R.string.net_problem), Toast.LENGTH_LONG).show()
-        }?.subscribe{
-            mAdapter.update(it.results)
-            Log.d("tag", "results" + it.results)
-        }
 
         cities_spinner.onItemSelectedListener = object: OnItemSelectedListener{
             override fun onNothingSelected(parent: AdapterView<*>?) {}

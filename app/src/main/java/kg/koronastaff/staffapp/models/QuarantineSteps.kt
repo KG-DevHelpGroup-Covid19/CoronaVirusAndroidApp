@@ -2,6 +2,6 @@ package kg.koronastaff.staffapp.models
 
 data class QuarantineSteps(
         var id: Int,
-        var title: String,
+        var step: String,
         var body: String
 )

@@ -7,11 +7,16 @@ import androidx.recyclerview.widget.RecyclerView
 import kg.koronastaff.staffapp.R
 import kg.koronastaff.staffapp.models.City
 import kg.koronastaff.staffapp.ui.map.ImplCityView
+import kg.koronastaff.staffapp.ui.map.MapFragment
 import kg.koronastaff.staffapp.ui.tests.ImplTestFragmentView
 import kotlinx.android.synthetic.main.item_city_name.view.*
 import java.util.*
 
-class CityListAdapter(private var list: ArrayList<*>, private var implCityView: ImplCityView?, private var implTestFragmentView: ImplTestFragmentView?, private var LAYOUT: Int) : RecyclerView.Adapter<CityListAdapter.MyCityHolder>() {
+class CityListAdapter(private var list: ArrayList<*>,
+                      private var implCityView: ImplCityView?,
+                      private var implTestFragmentView: ImplTestFragmentView?,
+                      private var LAYOUT: Int) :
+        RecyclerView.Adapter<CityListAdapter.MyCityHolder>() {
 
     private val LAYOUT_REGIONS = 10001
 

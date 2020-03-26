@@ -1,5 +1,6 @@
 package kg.koronastaff.staffapp.adapters
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
@@ -21,10 +22,11 @@ class QuarantineAdapter(private var mDataset: ArrayList<QuarantineSteps>) :
         return MyViewHolder(v)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val f = mDataset[position]
         val title = holder.frame.findViewById<TextView>(R.id.step_num)
-        title.text = f.title
+        title.text = "Шаг" + " "  + f.step
         val body = holder.frame.findViewById<TextView>(R.id.step_body)
         body.text = f.body
     }
