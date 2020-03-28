@@ -23,6 +23,7 @@
             Скачать приложение на Android
         </button>
     </a>
+    <p>Количество скачиваний: <span id="count_downloads"></span> </p>
 </section>
 
 <div class="container">
@@ -34,6 +35,14 @@
     Из-за этого могут появляться предупреждения. </p>
 </div>
 
+
+<script>
+    fetch("https://api.github.com/repos/KG-DevHelpGroup-Covid19/CoronaVirusAndroidApp/releases").then((r) => {
+        r.json().then(r=>{
+            document.getElementById('count_downloads').innerHTML = r[0]["assets"][0]['download_count'];
+        })
+    })
+</script>
 
 </body>
 </html>
