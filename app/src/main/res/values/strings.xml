@@ -1,16 +1,16 @@
 <resources>
     <string name="app_name">Штаб КР по COVID-19</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_desc">Navigation header</string>
+    <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
+    <string name="navigation_drawer_close" translatable="false">Close navigation drawer</string>
+    <string name="nav_header_desc" translatable="false">Navigation header</string>
 
 
     //----------------------------------------------
     //крыша
     <string name="head_dead">Штаб КР по COVID-19</string>
-    <string name="head_lang_kg">KG</string>
-    <string name="head_lang_eng">ENG</string>
-    <string name="head_lang_ru">RU</string>
+    <string name="head_lang_kg" translatable="false">KG</string>
+    <string name="head_lang_eng" translatable="false">ENG</string>
+    <string name="head_lang_ru" translatable="false">RU</string>
 
     <string-array name="head_lang">
         <item>KG</item>
@@ -25,134 +25,91 @@
 
     //заражены
     <string name="status_kg_info">Данные по Кыргызстану в режиме онлайн</string>
-    <string name="status_infected">Заражены:</string>
-    <string name="status_recovered">Выздоровели:</string>
-    <string name="status_dead">Умерли:</string>
+    <string name="status_infected" translatable="false">Заражены:</string>
+    <string name="status_recovered" translatable="false">Выздоровели:</string>
+    <string name="status_dead" translatable="false">Умерли:</string>
 
     //menu 2
-    <string name="menu_news">Новости КР</string>
-    <string name="menu_map_help">Карта с пунктами помощи</string>
-    <string name="menu_tips_voz">Советы по гигиене и рекомендации ВОЗ</string>
-    <string name="menu_quations_covid19">Вопросы про вирус COVID19</string>
-    <string name="menu_quarantine">Карантин</string>
-    <string name="menu_fake">Фейки</string>
-    <string name="menu_contact">Контакты</string>
+    <string name="menu_news" translatable="false">Новости КР</string>
+    <string name="menu_map_help" translatable="false">Карта с пунктами помощи</string>
+    <string name="menu_tips_voz" translatable="false">Советы по гигиене и рекомендации ВОЗ</string>
+    <string name="menu_quations_covid19" translatable="false">Вопросы про вирус COVID19</string>
+    <string name="menu_quarantine" translatable="false">Карантин</string>
+    <string name="menu_fake" translatable="false">Фейки</string>
+    <string name="menu_contact" translatable="false">Контакты</string>
 
     //----------------------------------------------
     //news
 
-    <string name="news_name">Новости</string>
+    <string name="news_name" translatable="false">Новости</string>
 
     //----------------------------------------------
 
     //map
-    <string name="map_name">Карта с пунктами помощи</string>
-    <string name="map_city">Ваш город</string>
+    <string name="map_name" translatable="false">Карта с пунктами помощи</string>
+    <string name="map_city" translatable="false">Ваш город</string>
 
     //map - города
-    <string name="map_city_bishkek">Бишкек</string>
-    <string name="map_city_osh">Ош</string>
-    <string name="map_city_djalal_abad">Джалал-Абад</string>
+    <string name="map_city_bishkek" translatable="false">Бишкек</string>
+    <string name="map_city_osh" translatable="false">Ош</string>
+    <string name="map_city_djalal_abad" translatable="false">Джалал-Абад</string>
 
     //map - bishkek
-    <string name="map_address_bishkek">г.Бишкек, ​Тоголок Молдо, 1/13</string>
-    <string name="map_bishkek_telephone_bishkek">0312 00 00 00</string>
-    <string name="map_bishkek_site_bishkek">gov.covid19.kg</string>
+    <string name="map_address_bishkek" translatable="false">г.Бишкек, ​Тоголок Молдо, 1/13</string>
+    <string name="map_bishkek_telephone_bishkek" translatable="false">0312 00 00 00</string>
+    <string name="map_bishkek_site_bishkek" translatable="false">gov.covid19.kg</string>
 
     //map - osh
-    <string name="map_address_osh">г.Бишкек, ​Тоголок Молдо, 1/13</string>
-    <string name="map_telephone_osh">0312 00 00 00</string>
-    <string name="map_site_osh">gov.covid19.kg</string>
+    <string name="map_address_osh" translatable="false">г.Бишкек, ​Тоголок Молдо, 1/13</string>
+    <string name="map_telephone_osh" translatable="false">0312 00 00 00</string>
+    <string name="map_site_osh" translatable="false">gov.covid19.kg</string>
 
     //----------------------------------------------
     //tips
-    <string name="tips_name">Советы по гигиене и рекомендации ВОЗ</string>
+    <string name="tips_name" translatable="false">Советы по гигиене и рекомендации ВОЗ</string>
 
-
-    //----------------------------------------------
-    //quations
-    <string name="quations_name">Вопросы про вирус COVID19</string>
-    <string name="quations_text">Здесь собраны часто задаваемы вопросы по вирусу помимо этого вы
+    <string name="quations_name" translatable="false">Вопросы про вирус COVID19</string>
+    <string name="quations_text" translatable="false">Здесь собраны часто задаваемы вопросы по вирусу помимо этого вы
         можете пройти тест на наличие признаков COVID19</string>
 
-    <string name="quations_test">Пройти тест</string>
+    <string name="quations_test" translatable="false">Пройти тест</string>
 
-    //----------------------------------------------
-    //test
-    <string name="test_name">Тест на наличие синдромов</string>
-    <string name="test_quations_yes">Да</string>
-    <string name="test_quations_no">Нет</string>
+    <string name="test_name" translatable="false">Тест на наличие синдромов</string>
+    <string name="test_quations_yes" translatable="false">Да</string>
+    <string name="test_quations_no" translatable="false">Нет</string>
 
 
-    //----------------------------------------------
-    //test-profile
-    <string name="test_profile_name">Имя</string>
-    <string name="test_profile_last_name">Фамилия</string>
-    <string name="test_profile_state">Область</string>
-    <string name="test_profile_city">Город</string>
-    <string name="test_profile_area">Район</string>
-    <string name="test_profile_age">Возраст</string>
-    <string name="test_profile_send">Отправить</string>
+    <string name="test_profile_name" translatable="false">Имя</string>
+    <string name="test_profile_last_name" translatable="false">Фамилия</string>
+    <string name="test_profile_state" translatable="false">Область</string>
+    <string name="test_profile_city" translatable="false">Город</string>
+    <string name="test_profile_area" translatable="false">Район</string>
+    <string name="test_profile_age" translatable="false">Возраст</string>
+    <string name="test_profile_send" translatable="false">Отправить</string>
 
-
-    //----------------------------------------------
-    //quarantine
-    <string name="quarantine_name">Как организовать карантин дома</string>
-
-
-    //----------------------------------------------
-    //fake
-    <string name="fake_name">Фейки</string>
-    <string name="fake_label">
+    <string name="quarantine_name" translatable="false">Как организовать карантин дома</string>
+    <string name="fake_name" translatable="false">Фейки</string>
+    <string name="fake_label" translatable="false">
         Внимание в данном разделе вы можете проверить информацию о фейках
     </string>
 
+    <string name="contact_name" translatable="false">Контакты</string>
+    <string name="current_lang" translatable="false">RU</string>
+    <string name="menu_home" translatable="false">домой</string>
+    <string name="stat_label" translatable="false">Данные по Кыргызстану в режиме онлайн</string>
+    <string name="infected" translatable="false">Заражены</string>
+    <string name="recovered" translatable="false">Выздоровели</string>
 
-    //----------------------------------------------
-    //contact
-    <string name="contact_name">Контакты</string>
-    <string name="current_lang">RU</string>
-    <string name="menu_home">домой</string>
-    <string name="stat_label">Данные по Кыргызстану в режиме онлайн</string>
-    <string name="infected">Заражены</string>
-    <string name="recovered">Выздоровели</string>
-
-    <string name="contacts">Телефоны Сall-центра Минэкономики КР для предпринимателей: \n
-        📍 +996 312 620319; \n
-        📍 Whats app 0555774405.\n
-        ✉️ Также параллельно по электронному адресу: info@mineconom.gov.kg,\n
-        можно направить вопросы в письменном виде.\n
-        -------------------------------------\n
-        🇰🇬 COVID-19:\n
-        ☎️ Ишкерлер үчүн үчүн КРдин Экономика министрлигинин Сall-борборунун телефондору:\n
-        📍 +996 312 620319;\n
-        📍 Whats Аpp 0555774405.</string>
-
-    <string name="contacts_title">Телефоны Сall-центра Минэкономики КР для предпринимателей:</string>
-    <string name="contacts_phone">+996 312 620319</string>
-    <string name="contacts_whatsapp">Whats Аpp 0555774405</string>
-    <string name="contacts_email">Также параллельно по электронному адресу: info@mineconom.gov.kg,\n
-        можно направить вопросы в письменном виде</string>
-
-    <string name="contacts_email_ky">Ошондой эле электрондук дарекке:
-info@mineconom.gov.kg, \n
- суроолорду жазуу түрүндө жөнөтө аласыз.</string>
-
-
-    <string name="contacts_title_ky">Ишкерлер үчүн үчүн КРдин Экономика министрлигинин Сall-борборунун телефондору:</string>
-
-    <string name="of"> из </string>
-    <string name="test_positive">Заполните анкету о себе</string>
-    <string name="test_positive_second">В случае потверждения у вас всех признаков covid 19 просим вас запонить анкету</string>
-    <string name="google_maps">Открыть в Google Maps</string>
-    <string name="net_problem">Проблемы с связью попробуйте обновить страницу позже</string>
-    <string name="back">назад</string>
-    <string name="stations_not_found_text">Мы не нашли пукты по указанному городу</string>
-    <string name="quarantine_body">Равным образом укрепление и развитие структуры позволяет оценить значение модели развития. С другой стороны дальнейшее развитие различных форм деятельности обеспечивает широкому кругу (специалистов) участие в формировании систем массового участия.</string>
-    <string name="quarantine_title">Шаг 1</string>
-    <string name="toast_results_send">результаты отправлены</string>
-    <string name="toast_error">ошибка</string>
-    <string name="toast_test_ok">ответ принят</string>
-    <string name="choose_city">Выберите город</string>
-    <string name="choose_region">С начало выберите область</string>
+    <string name="of" translatable="false"> из </string>
+    <string name="test_positive" translatable="false">Заполните анкету о себе</string>
+    <string name="test_positive_second" translatable="false">В случае потверждения у вас всех признаков covid 19 просим вас запонить анкету</string>
+    <string name="google_maps" translatable="false">Открыть в Google Maps</string>
+    <string name="net_problem" translatable="false">Проблемы с связью попробуйте обновить страницу позже</string>
+    <string name="back" translatable="false">назад</string>
+    <string name="stations_not_found_text" translatable="false">Мы не нашли пукты по указанному городу</string>
+    <string name="toast_results_send" translatable="false">результаты отправлены</string>
+    <string name="toast_error" translatable="false">ошибка</string>
+    <string name="toast_test_ok" translatable="false">ответ принят</string>
+    <string name="choose_city" translatable="false">Выберите город</string>
+    <string name="choose_region" translatable="false">С начало выберите область</string>
 </resources>

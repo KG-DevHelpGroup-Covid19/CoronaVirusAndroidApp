@@ -1,0 +1,26 @@
+body{
+    background: #efefef;
+    font-family: 'Roboto', sans-serif;
+}
+
+.logo{
+    margin: 10px auto;
+    border-radius: 10px;
+}
+
+section{
+    text-align: center;
+}
+
+button{
+    padding: 15px;
+    border-radius: 5px;
+    background: #0A609D;
+    color: white;
+    border: none;
+}
+
+.container{
+    margin: 10px auto;
+    max-width: 1000px;
+}

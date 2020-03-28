@@ -36,6 +36,9 @@ class MainActivity : AppCompatActivity() {
                 drawer.openDrawer(Gravity.LEFT)
             }
         }
+
+
+
     }
 
     override fun onSupportNavigateUp(): Boolean {
